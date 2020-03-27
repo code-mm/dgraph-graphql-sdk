@@ -1,0 +1,3 @@
+[submodule "libs/graphql_java_gen"]
+	path = libs/graphql_java_gen
+	url = https://github.com/Shopify/graphql_java_gen.git
