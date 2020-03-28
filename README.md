@@ -26,11 +26,16 @@ https://play.dgraph.io/
 
     java -jar schema-utils.jar schema.json
      
+     
+     
+## bundle
+
+    bundle
+     
 ## 生成
 
     ruby  update_schema.rb
     
-  
-## uploadArchives
+## 上次到maven仓库
 
     uploadArchives
