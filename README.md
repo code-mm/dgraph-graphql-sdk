@@ -21,7 +21,10 @@ https://play.dgraph.io/
 
 ## 下载 schema.json
 
-    gradlew :app:downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://localhost:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
+    gradlew :sdk:downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://localhost:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
+    gradlew :sdk:downloadApolloSchema -Pcom.apollographql.apollo.endpoint=https://play.dgraph.io/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
+
+
 
 
 ## 进入 schema.json 的目录
