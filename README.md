@@ -25,3 +25,12 @@ https://play.dgraph.io/
 ## 使用下面命令修改Query 为 QueryRoot
 
     java -jar schema-utils.jar schema.json
+     
+## 生成
+
+    ruby  update_schema.rb
+    
+  
+## uploadArchives
+
+    uploadArchives
