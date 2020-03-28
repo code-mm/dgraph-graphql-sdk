@@ -1,3 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'graphql_java_gen', path: 'F:/src/android/graphql_java_gen/'

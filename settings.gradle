@@ -1,3 +1,2 @@
-rootProject.name='dgraph-graphql'
-include ':app'
-include ':sdk'
+rootProject.name = 'dgraph-graphql'
+
