@@ -10,19 +10,13 @@ https://github.com/Shopify/graphql_java_gen
 
 https://graphql.dgraph.io/docs/quick-start/
 
-## docker 安装 dgraph
-
-docker run -p 8080:8080 -it -v /mnt/dgraph:/dgraph dgraph/standalone:v2.0.0-rc1
-
 ## Rect 工具
 
 https://play.dgraph.io/
 
-
 ## 下载 schema.json
 
-    gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=https://play.dgraph.io/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
-
+    gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://dev.mhw828.com:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
 
 ## 进入 schema.json 的目录
 
