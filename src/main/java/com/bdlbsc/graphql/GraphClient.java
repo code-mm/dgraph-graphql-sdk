@@ -1,12 +1,8 @@
 package com.bdlbsc.graphql;
-
-
 import com.dgraph.graphql.Mutation;
 import com.dgraph.graphql.MutationQuery;
 import com.dgraph.graphql.QueryRoot;
-import com.dgraph.graphql.QueryRootQuery;
-import lombok.Builder;
-import lombok.Singular;
+import com.dgraph.graphql.QueryRootQuery;;
 import okhttp3.OkHttpClient;
 import org.json.JSONObject;
 
@@ -21,7 +17,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
-@Builder
+
 public class GraphClient {
 
     private static final GraphClient client = new GraphClient();
