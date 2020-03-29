@@ -11,17 +11,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+
 public class OkHttpUtils {
-    public static long CONNECTTIMEOUT = 5;
-    public static long READTIMEOUT = 5;
-    public static long WRITETIMEOUT = 5;
+    public static long CONNECTTIMEOUT = 10;
+    public static long READTIMEOUT = 10;
+    public static long WRITETIMEOUT = 10;
 
     private OkHttpUtils() {
-    }
-
-    private static OkHttpClient client;
-
-    public static OkHttpClient getInstance() {
         if (client == null) {
             client = new OkHttpClient.Builder()
                     .connectTimeout(CONNECTTIMEOUT, TimeUnit.SECONDS)
@@ -29,15 +25,21 @@ public class OkHttpUtils {
                     .writeTimeout(WRITETIMEOUT, TimeUnit.SECONDS)
                     .build();
         }
-        return client;
     }
 
+    private static OkHttpClient client;
+
+    private static final OkHttpUtils instance = new OkHttpUtils();
+
+    public static OkHttpUtils getInstance() {
+        return instance;
+    }
+
+    public void setClient(OkHttpClient client) {
+       this.client = client;
+    }
 
     public static void doGet(Map<String, String> headers, String url, Callback callback) {
-
-        //创建OkHttpClient请求对象
-        OkHttpClient okHttpClient = getInstance();
-
         Request.Builder request = new Request.Builder();
         if (headers != null) {
             for (String k : headers.keySet()) {
@@ -48,7 +50,7 @@ public class OkHttpUtils {
         //创建Request
         request.url(url);
         //得到Call对象
-        Call call = okHttpClient.newCall(request.build());
+        Call call = client.newCall(request.build());
         //执行异步请求
         call.enqueue(callback);
     }
@@ -74,7 +76,7 @@ public class OkHttpUtils {
 
         }
         request.post(builder.build());
-        getInstance().newCall(request.build()).enqueue(callback);
+        client.newCall(request.build()).enqueue(callback);
     }
 
 
@@ -92,6 +94,6 @@ public class OkHttpUtils {
         request.url(url);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), body);
         request.post(requestBody);
-        getInstance().newCall(request.build()).enqueue(callback);
+        client.newCall(request.build()).enqueue(callback);
     }
 }

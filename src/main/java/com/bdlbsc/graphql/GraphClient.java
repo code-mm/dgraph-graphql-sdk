@@ -5,6 +5,9 @@ import com.dgraph.graphql.Mutation;
 import com.dgraph.graphql.MutationQuery;
 import com.dgraph.graphql.QueryRoot;
 import com.dgraph.graphql.QueryRootQuery;
+import lombok.Builder;
+import lombok.Singular;
+import okhttp3.OkHttpClient;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -18,6 +21,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
+@Builder
 public class GraphClient {
 
     private static final GraphClient client = new GraphClient();
@@ -44,6 +48,14 @@ public class GraphClient {
         this.headers = headers;
     }
 
+
+    private OkHttpClient okHttpClient;
+
+    public void setHttpClient(OkHttpClient okHttpClient) {
+        this.okHttpClient = okHttpClient;
+        OkHttpUtils.getInstance().setClient(okHttpClient);
+    }
+
     public Single<QueryRoot> queryGraph(final QueryRootQuery queryRootQuery) {
 
         return Single.create(new SingleOnSubscribe<QueryRoot>() {
@@ -53,6 +65,7 @@ public class GraphClient {
                 String queryString = queryRootQuery.toString();
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("query", queryString);
+
 
                 OkHttpUtils.doRequestBody(headers, url, jsonObject.toString(), new Callback() {
                     @Override
