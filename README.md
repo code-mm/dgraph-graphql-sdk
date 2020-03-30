@@ -1,3 +1,5 @@
+# 环境准备
+
 ## 依赖项目
 
    https://github.com/Shopify/graphql_java_gen
@@ -41,7 +43,7 @@ https://play.dgraph.io/
     uploadArchives
     
     
-## windows 一键操作
+# windows 一键部署
 
     deploy.bat  
 
