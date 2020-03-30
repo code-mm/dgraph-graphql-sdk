@@ -62,7 +62,6 @@ public class GraphClient {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("query", queryString);
 
-
                 OkHttpUtils.doRequestBody(headers, url, jsonObject.toString(), new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -71,7 +70,6 @@ public class GraphClient {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-
                         try {
                             QueryRoot root = httpResponseParser.parseQueryRoot(response);
                             singleEmitter.onSuccess(root);
@@ -81,18 +79,15 @@ public class GraphClient {
                         }
                     }
                 });
-
             }
         });
     }
 
 
     public Single<Mutation> mutateGraph(MutationQuery mutationQuery) {
-
         return Single.create(new SingleOnSubscribe<Mutation>() {
             @Override
             public void subscribe(SingleEmitter<Mutation> singleEmitter) throws Exception {
-
 
                 String queryString = mutationQuery.toString();
                 JSONObject jsonObject = new JSONObject();

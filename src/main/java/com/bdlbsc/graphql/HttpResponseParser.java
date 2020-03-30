@@ -34,7 +34,7 @@ public class HttpResponseParser {
                 return new TopLevelResponse(root);
             } catch (InvalidGraphQLException e) {
                 e.printStackTrace();
-                throw new GraphError.ParseError("", e);
+                throw new GraphError.ParseError("parse error", e);
             }
         } else {
             throw new GraphError.HttpError(response);

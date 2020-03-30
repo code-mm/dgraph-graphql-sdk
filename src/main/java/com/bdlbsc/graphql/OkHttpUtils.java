@@ -27,6 +27,15 @@ public class OkHttpUtils {
         }
     }
 
+    private static OkHttpClient defaultClient() {
+        return new OkHttpClient.Builder()
+                .connectTimeout(CONNECTTIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(READTIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(WRITETIMEOUT, TimeUnit.SECONDS)
+                .build();
+    }
+
+
     private static OkHttpClient client;
 
     private static final OkHttpUtils instance = new OkHttpUtils();
@@ -36,7 +45,7 @@ public class OkHttpUtils {
     }
 
     public void setClient(OkHttpClient client) {
-       this.client = client;
+        this.client = client;
     }
 
     public static void doGet(Map<String, String> headers, String url, Callback callback) {
@@ -73,9 +82,11 @@ public class OkHttpUtils {
 
         for (String key : params.keySet()) {
             builder.add(key, params.get(key));
-
         }
         request.post(builder.build());
+        if (client == null) {
+            client = defaultClient();
+        }
         client.newCall(request.build()).enqueue(callback);
     }
 
@@ -94,6 +105,9 @@ public class OkHttpUtils {
         request.url(url);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), body);
         request.post(requestBody);
+        if (client == null) {
+            client = defaultClient();
+        }
         client.newCall(request.build()).enqueue(callback);
     }
 }
