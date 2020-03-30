@@ -33,7 +33,7 @@ public class GraphClient {
         return new Builder();
     }
 
-    static class Builder {
+   public static class Builder {
 
         private static GraphClient graphClient;
 
