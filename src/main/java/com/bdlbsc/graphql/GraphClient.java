@@ -1,4 +1,5 @@
 package com.bdlbsc.graphql;
+
 import com.dgraph.graphql.Mutation;
 import com.dgraph.graphql.MutationQuery;
 import com.dgraph.graphql.QueryRoot;
@@ -16,41 +17,51 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 
 
 public class GraphClient {
-
-    private static final GraphClient client = new GraphClient();
-
     private HttpResponseParser httpResponseParser;
-
-    public static GraphClient getInstance() {
-        return client;
-    }
-
     private GraphClient() {
         httpResponseParser = new HttpResponseParser();
     }
-
     private String url;
-
-    public void setBaseUrl(String url) {
-        this.url = url;
-    }
-
     private Map<String, String> headers;
-
-    public void setHeaders(Map<String, String> headers) {
-        this.headers = headers;
-    }
-
-
     private OkHttpClient okHttpClient;
 
-    public void setHttpClient(OkHttpClient okHttpClient) {
-        this.okHttpClient = okHttpClient;
-        OkHttpUtils.getInstance().setClient(okHttpClient);
+    public static Builder builder() {
+        return new Builder();
     }
+
+    static class Builder {
+
+        private static GraphClient graphClient;
+
+        private Builder() {
+            graphClient = new GraphClient();
+        }
+
+        public Builder setUrl(String url) {
+            graphClient.url = url;
+            return this;
+        }
+
+        public Builder setHttpClient(OkHttpClient client) {
+            graphClient.okHttpClient = client;
+            OkHttpUtils.getInstance().setClient(client);
+            return this;
+        }
+
+        public Builder setHeaders(Map<String, String> headers) {
+            graphClient.headers = headers;
+            return this;
+        }
+
+        public GraphClient build() {
+            return graphClient;
+        }
+    }
+
 
     public Single<QueryRoot> queryGraph(final QueryRootQuery queryRootQuery) {
 
