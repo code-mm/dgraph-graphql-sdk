@@ -1,53 +1,102 @@
 # 环境准备
 
-## 依赖项目
+- 安装ruby (下载地址 https://rubyinstaller.org/downloads/)
 
-   https://github.com/Shopify/graphql_java_gen
+# 安装dgraph
 
-##  Query 应该修改为 QueryRoot
+- dgraph 文档 https://graphql.dgraph.io/docs/quick-start/
 
-https://app.shopify.com/services/graphql/introspection/storefront?api_client_api_key=4a6c829ec3cb12ef9004bf8ed27adf12&api_version=2020-01
+- Rect 工具 https://play.dgraph.io/
 
-## dgraph 文档
+# 下载schema.json
 
-https://graphql.dgraph.io/docs/quick-start/
+- 借助apollographql下载 schema.json
 
-## Rect 工具
-
-https://play.dgraph.io/
-
-## 下载 schema.json
-
-    gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://localhost:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
-
-## 进入 schema.json 的目录
-
-    cd app/src/main/graphql
-
-## 使用下面命令修改Query 为 QueryRoot
-
-    java -jar schema-utils.jar schema.json
-     
-     
-     
-## bundle
-
-    bundle
-     
-## 生成
-
-    ruby  update_schema.rb
-    
-## 上次到maven仓库
-
-    uploadArchives
-    
-    
+        gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://localhost:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
+        
+  
 # windows 一键部署
 
     deploy.bat  
 
-
 # 测试项目地址
 
 https://github.com/m-maohuawei/dgraph-graphql-sdk-test.git
+
+
+## 使用example 
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+
+        GraphClient graphClient = GraphClient.builder().setHttpClient(new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build())
+                .setHeaders(headers)
+                .setUrl("http://localhost:8080/graphql")
+                .build();
+
+        graphClient.mutateGraph(Operations.mutation(mutationQuery -> {
+            List<AddProductInput> list = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                AddProductInput addProductInput = new AddProductInput();
+                addProductInput.setName("测试商品" + i);
+                list.add(addProductInput);
+            }
+            mutationQuery.addProduct(list, addProductPayloadQuery -> {
+                addProductPayloadQuery
+                        .numUids();
+                addProductPayloadQuery.product(productQuery -> {
+                    productQuery.name();
+                    productQuery.productId();
+                });
+            });
+        })).subscribe(new io.reactivex.SingleObserver<Mutation>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(Mutation mutation) {
+                List<Product> product = mutation.getAddProduct().getProduct();
+                for (Product it : product) {
+                    System.out.println("插入成功 : id : " + it.getProductId() + " name : " + it.getName());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+            }
+        });
+
+
+        graphClient.queryGraph(Operations.query(queryRootQuery -> queryRootQuery.queryProduct(new ProductQueryDefinition() {
+            @Override
+            public void define(ProductQuery productQuery) {
+                productQuery.name();
+                productQuery.productId();
+            }
+        })))
+                .subscribe(new SingleObserver<QueryRoot>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onSuccess(QueryRoot queryRoot) {
+                        List<Product> queryProduct = queryRoot.getQueryProduct();
+                        for (Product it : queryProduct) {
+                            System.out.println("查询成功 : id : " + it.getProductId() + " name : " + it.getName());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        System.out.println(e.getMessage());
+                    }
+                });
