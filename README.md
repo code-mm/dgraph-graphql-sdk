@@ -47,3 +47,7 @@ https://play.dgraph.io/
 
     deploy.bat  
 
+
+# 测试项目地址
+
+https://github.com/m-maohuawei/dgraph-graphql-sdk-test.git
