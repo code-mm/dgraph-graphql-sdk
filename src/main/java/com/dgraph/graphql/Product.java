@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* 
+* 产品
 */
-public class Product extends AbstractResponse<Product> {
+public class Product extends AbstractResponse<Product> implements Shoppingable, Thing {
     public Product() {
     }
 
@@ -37,13 +37,23 @@ public class Product extends AbstractResponse<Product> {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
-                case "productID": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+                case "namespaces": {
+                    List<Namespace> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<Namespace> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            list1.add(new Namespace(jsonAsObject(element1, key)));
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
 
                     break;
                 }
 
-                case "name": {
+                case "identifier": {
                     String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
                         optional1 = jsonAsString(field.getValue(), key);
@@ -54,14 +64,59 @@ public class Product extends AbstractResponse<Product> {
                     break;
                 }
 
-                case "reviews": {
-                    List<Review> optional1 = null;
+                case "name": {
+                    responseData.put(key, jsonAsString(field.getValue(), key));
+
+                    break;
+                }
+
+                case "alternateName": {
+                    String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
-                        List<Review> list1 = new ArrayList<>();
+                        optional1 = jsonAsString(field.getValue(), key);
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "description": {
+                    String optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = jsonAsString(field.getValue(), key);
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
+                case "isShoppingable": {
+                    Boolean optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = jsonAsBoolean(field.getValue(), key);
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "hasModels": {
+                    List<ProductModel> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<ProductModel> list1 = new ArrayList<>();
                         for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
-                            Review optional2 = null;
+                            ProductModel optional2 = null;
                             if (!element1.isJsonNull()) {
-                                optional2 = new Review(jsonAsObject(element1, key));
+                                optional2 = new ProductModel(jsonAsObject(element1, key));
                             }
 
                             list1.add(optional2);
@@ -94,12 +149,25 @@ public class Product extends AbstractResponse<Product> {
     * 
     */
 
-    public ID getProductId() {
-        return (ID) get("productID");
+    public List<Namespace> getNamespaces() {
+        return (List<Namespace>) get("namespaces");
     }
 
-    public Product setProductId(ID arg) {
-        optimisticData.put(getKey("productID"), arg);
+    public Product setNamespaces(List<Namespace> arg) {
+        optimisticData.put(getKey("namespaces"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public String getIdentifier() {
+        return (String) get("identifier");
+    }
+
+    public Product setIdentifier(String arg) {
+        optimisticData.put(getKey("identifier"), arg);
         return this;
     }
 
@@ -120,22 +188,84 @@ public class Product extends AbstractResponse<Product> {
     * 
     */
 
-    public List<Review> getReviews() {
-        return (List<Review>) get("reviews");
+    public String getAlternateName() {
+        return (String) get("alternateName");
     }
 
-    public Product setReviews(List<Review> arg) {
-        optimisticData.put(getKey("reviews"), arg);
+    public Product setAlternateName(String arg) {
+        optimisticData.put(getKey("alternateName"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public String getDescription() {
+        return (String) get("description");
+    }
+
+    public Product setDescription(String arg) {
+        optimisticData.put(getKey("description"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
+    }
+
+    public Product setId(ID arg) {
+        optimisticData.put(getKey("id"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public Boolean getIsShoppingable() {
+        return (Boolean) get("isShoppingable");
+    }
+
+    public Product setIsShoppingable(Boolean arg) {
+        optimisticData.put(getKey("isShoppingable"), arg);
+        return this;
+    }
+
+    /**
+    * 【型号】 产品的型号。
+    */
+
+    public List<ProductModel> getHasModels() {
+        return (List<ProductModel>) get("hasModels");
+    }
+
+    public Product setHasModels(List<ProductModel> arg) {
+        optimisticData.put(getKey("hasModels"), arg);
         return this;
     }
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
-            case "productID": return false;
+            case "namespaces": return true;
+
+            case "identifier": return false;
 
             case "name": return false;
 
-            case "reviews": return true;
+            case "alternateName": return false;
+
+            case "description": return false;
+
+            case "id": return false;
+
+            case "isShoppingable": return false;
+
+            case "hasModels": return true;
 
             default: return false;
         }

@@ -28,13 +28,27 @@ import java.util.Map;
 public class ReviewRef implements Serializable {
     private Input<ID> id = Input.undefined();
 
-    private Input<ProductRef> about = Input.undefined();
+    private Input<List<NamespaceRef>> namespaces = Input.undefined();
 
-    private Input<CustomerRef> by = Input.undefined();
+    private Input<String> identifier = Input.undefined();
 
-    private Input<String> comment = Input.undefined();
+    private Input<String> name = Input.undefined();
 
-    private Input<Integer> rating = Input.undefined();
+    private Input<String> alternateName = Input.undefined();
+
+    private Input<String> description = Input.undefined();
+
+    private Input<ThingRef> itemReviewed = Input.undefined();
+
+    private Input<String> reviewAspect = Input.undefined();
+
+    private Input<String> reviewBody = Input.undefined();
+
+    private Input<Integer> ratingValue = Input.undefined();
+
+    private Input<UserRef> author = Input.undefined();
+
+    private Input<DateTime> dateCreated = Input.undefined();
 
     public ID getId() {
         return id.getValue();
@@ -57,87 +71,234 @@ public class ReviewRef implements Serializable {
         return this;
     }
 
-    public ProductRef getAbout() {
-        return about.getValue();
+    public List<NamespaceRef> getNamespaces() {
+        return namespaces.getValue();
     }
 
-    public Input<ProductRef> getAboutInput() {
-        return about;
+    public Input<List<NamespaceRef>> getNamespacesInput() {
+        return namespaces;
     }
 
-    public ReviewRef setAbout(ProductRef about) {
-        this.about = Input.optional(about);
+    public ReviewRef setNamespaces(List<NamespaceRef> namespaces) {
+        this.namespaces = Input.optional(namespaces);
         return this;
     }
 
-    public ReviewRef setAboutInput(Input<ProductRef> about) {
-        if (about == null) {
+    public ReviewRef setNamespacesInput(Input<List<NamespaceRef>> namespaces) {
+        if (namespaces == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.about = about;
+        this.namespaces = namespaces;
         return this;
     }
 
-    public CustomerRef getBy() {
-        return by.getValue();
+    public String getIdentifier() {
+        return identifier.getValue();
     }
 
-    public Input<CustomerRef> getByInput() {
-        return by;
+    public Input<String> getIdentifierInput() {
+        return identifier;
     }
 
-    public ReviewRef setBy(CustomerRef by) {
-        this.by = Input.optional(by);
+    public ReviewRef setIdentifier(String identifier) {
+        this.identifier = Input.optional(identifier);
         return this;
     }
 
-    public ReviewRef setByInput(Input<CustomerRef> by) {
-        if (by == null) {
+    public ReviewRef setIdentifierInput(Input<String> identifier) {
+        if (identifier == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.by = by;
+        this.identifier = identifier;
         return this;
     }
 
-    public String getComment() {
-        return comment.getValue();
+    public String getName() {
+        return name.getValue();
     }
 
-    public Input<String> getCommentInput() {
-        return comment;
+    public Input<String> getNameInput() {
+        return name;
     }
 
-    public ReviewRef setComment(String comment) {
-        this.comment = Input.optional(comment);
+    public ReviewRef setName(String name) {
+        this.name = Input.optional(name);
         return this;
     }
 
-    public ReviewRef setCommentInput(Input<String> comment) {
-        if (comment == null) {
+    public ReviewRef setNameInput(Input<String> name) {
+        if (name == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.comment = comment;
+        this.name = name;
         return this;
     }
 
-    public Integer getRating() {
-        return rating.getValue();
+    public String getAlternateName() {
+        return alternateName.getValue();
     }
 
-    public Input<Integer> getRatingInput() {
-        return rating;
+    public Input<String> getAlternateNameInput() {
+        return alternateName;
     }
 
-    public ReviewRef setRating(Integer rating) {
-        this.rating = Input.optional(rating);
+    public ReviewRef setAlternateName(String alternateName) {
+        this.alternateName = Input.optional(alternateName);
         return this;
     }
 
-    public ReviewRef setRatingInput(Input<Integer> rating) {
-        if (rating == null) {
+    public ReviewRef setAlternateNameInput(Input<String> alternateName) {
+        if (alternateName == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.rating = rating;
+        this.alternateName = alternateName;
+        return this;
+    }
+
+    public String getDescription() {
+        return description.getValue();
+    }
+
+    public Input<String> getDescriptionInput() {
+        return description;
+    }
+
+    public ReviewRef setDescription(String description) {
+        this.description = Input.optional(description);
+        return this;
+    }
+
+    public ReviewRef setDescriptionInput(Input<String> description) {
+        if (description == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.description = description;
+        return this;
+    }
+
+    public ThingRef getItemReviewed() {
+        return itemReviewed.getValue();
+    }
+
+    public Input<ThingRef> getItemReviewedInput() {
+        return itemReviewed;
+    }
+
+    public ReviewRef setItemReviewed(ThingRef itemReviewed) {
+        this.itemReviewed = Input.optional(itemReviewed);
+        return this;
+    }
+
+    public ReviewRef setItemReviewedInput(Input<ThingRef> itemReviewed) {
+        if (itemReviewed == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.itemReviewed = itemReviewed;
+        return this;
+    }
+
+    public String getReviewAspect() {
+        return reviewAspect.getValue();
+    }
+
+    public Input<String> getReviewAspectInput() {
+        return reviewAspect;
+    }
+
+    public ReviewRef setReviewAspect(String reviewAspect) {
+        this.reviewAspect = Input.optional(reviewAspect);
+        return this;
+    }
+
+    public ReviewRef setReviewAspectInput(Input<String> reviewAspect) {
+        if (reviewAspect == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.reviewAspect = reviewAspect;
+        return this;
+    }
+
+    public String getReviewBody() {
+        return reviewBody.getValue();
+    }
+
+    public Input<String> getReviewBodyInput() {
+        return reviewBody;
+    }
+
+    public ReviewRef setReviewBody(String reviewBody) {
+        this.reviewBody = Input.optional(reviewBody);
+        return this;
+    }
+
+    public ReviewRef setReviewBodyInput(Input<String> reviewBody) {
+        if (reviewBody == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.reviewBody = reviewBody;
+        return this;
+    }
+
+    public Integer getRatingValue() {
+        return ratingValue.getValue();
+    }
+
+    public Input<Integer> getRatingValueInput() {
+        return ratingValue;
+    }
+
+    public ReviewRef setRatingValue(Integer ratingValue) {
+        this.ratingValue = Input.optional(ratingValue);
+        return this;
+    }
+
+    public ReviewRef setRatingValueInput(Input<Integer> ratingValue) {
+        if (ratingValue == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.ratingValue = ratingValue;
+        return this;
+    }
+
+    public UserRef getAuthor() {
+        return author.getValue();
+    }
+
+    public Input<UserRef> getAuthorInput() {
+        return author;
+    }
+
+    public ReviewRef setAuthor(UserRef author) {
+        this.author = Input.optional(author);
+        return this;
+    }
+
+    public ReviewRef setAuthorInput(Input<UserRef> author) {
+        if (author == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.author = author;
+        return this;
+    }
+
+    public DateTime getDateCreated() {
+        return dateCreated.getValue();
+    }
+
+    public Input<DateTime> getDateCreatedInput() {
+        return dateCreated;
+    }
+
+    public ReviewRef setDateCreated(DateTime dateCreated) {
+        this.dateCreated = Input.optional(dateCreated);
+        return this;
+    }
+
+    public ReviewRef setDateCreatedInput(Input<DateTime> dateCreated) {
+        if (dateCreated == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.dateCreated = dateCreated;
         return this;
     }
 
@@ -156,45 +317,131 @@ public class ReviewRef implements Serializable {
             }
         }
 
-        if (this.about.isDefined()) {
+        if (this.namespaces.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("about:");
-            if (about.getValue() != null) {
-                about.getValue().appendTo(_queryBuilder);
+            _queryBuilder.append("namespaces:");
+            if (namespaces.getValue() != null) {
+                _queryBuilder.append('[');
+                {
+                    String listSeperator1 = "";
+                    for (NamespaceRef item1 : namespaces.getValue()) {
+                        _queryBuilder.append(listSeperator1);
+                        listSeperator1 = ",";
+                        item1.appendTo(_queryBuilder);
+                    }
+                }
+                _queryBuilder.append(']');
             } else {
                 _queryBuilder.append("null");
             }
         }
 
-        if (this.by.isDefined()) {
+        if (this.identifier.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("by:");
-            if (by.getValue() != null) {
-                by.getValue().appendTo(_queryBuilder);
+            _queryBuilder.append("identifier:");
+            if (identifier.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, identifier.getValue().toString());
             } else {
                 _queryBuilder.append("null");
             }
         }
 
-        if (this.comment.isDefined()) {
+        if (this.name.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("comment:");
-            if (comment.getValue() != null) {
-                Query.appendQuotedString(_queryBuilder, comment.getValue().toString());
+            _queryBuilder.append("name:");
+            if (name.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, name.getValue().toString());
             } else {
                 _queryBuilder.append("null");
             }
         }
 
-        if (this.rating.isDefined()) {
+        if (this.alternateName.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("rating:");
-            if (rating.getValue() != null) {
-                _queryBuilder.append(rating.getValue());
+            _queryBuilder.append("alternateName:");
+            if (alternateName.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, alternateName.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.description.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("description:");
+            if (description.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, description.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.itemReviewed.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("itemReviewed:");
+            if (itemReviewed.getValue() != null) {
+                itemReviewed.getValue().appendTo(_queryBuilder);
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.reviewAspect.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("reviewAspect:");
+            if (reviewAspect.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, reviewAspect.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.reviewBody.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("reviewBody:");
+            if (reviewBody.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, reviewBody.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.ratingValue.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("ratingValue:");
+            if (ratingValue.getValue() != null) {
+                _queryBuilder.append(ratingValue.getValue());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.author.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("author:");
+            if (author.getValue() != null) {
+                author.getValue().appendTo(_queryBuilder);
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.dateCreated.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("dateCreated:");
+            if (dateCreated.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, dateCreated.getValue().toString());
             } else {
                 _queryBuilder.append("null");
             }

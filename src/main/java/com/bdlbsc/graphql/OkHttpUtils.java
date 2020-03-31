@@ -1,15 +1,10 @@
 package com.bdlbsc.graphql;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import okhttp3.*;
 
 
 public class OkHttpUtils {
@@ -109,5 +104,25 @@ public class OkHttpUtils {
             client = defaultClient();
         }
         client.newCall(request.build()).enqueue(callback);
+    }
+
+    public static Response doRequestBody(
+            Map<String, String> headers,
+            String url,
+            String body) throws IOException {
+        Request.Builder request = new Request.Builder();
+        if (headers != null) {
+            for (String k : headers.keySet()) {
+                request.addHeader(k, headers.get(k));
+            }
+        }
+        request.url(url);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), body);
+        request.post(requestBody);
+        if (client == null) {
+            client = defaultClient();
+        }
+
+        return client.newCall(request.build()).execute();
     }
 }

@@ -26,17 +26,36 @@ import java.util.List;
 import java.util.Map;
 
 public class ReviewFilter implements Serializable {
+    private Input<StringHashFilter> name = Input.undefined();
+
     private Input<List<ID>> id = Input.undefined();
-
-    private Input<StringFullTextFilter> comment = Input.undefined();
-
-    private Input<IntFilter> rating = Input.undefined();
 
     private Input<ReviewFilter> and = Input.undefined();
 
     private Input<ReviewFilter> or = Input.undefined();
 
     private Input<ReviewFilter> not = Input.undefined();
+
+    public StringHashFilter getName() {
+        return name.getValue();
+    }
+
+    public Input<StringHashFilter> getNameInput() {
+        return name;
+    }
+
+    public ReviewFilter setName(StringHashFilter name) {
+        this.name = Input.optional(name);
+        return this;
+    }
+
+    public ReviewFilter setNameInput(Input<StringHashFilter> name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.name = name;
+        return this;
+    }
 
     public List<ID> getId() {
         return id.getValue();
@@ -56,48 +75,6 @@ public class ReviewFilter implements Serializable {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.id = id;
-        return this;
-    }
-
-    public StringFullTextFilter getComment() {
-        return comment.getValue();
-    }
-
-    public Input<StringFullTextFilter> getCommentInput() {
-        return comment;
-    }
-
-    public ReviewFilter setComment(StringFullTextFilter comment) {
-        this.comment = Input.optional(comment);
-        return this;
-    }
-
-    public ReviewFilter setCommentInput(Input<StringFullTextFilter> comment) {
-        if (comment == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.comment = comment;
-        return this;
-    }
-
-    public IntFilter getRating() {
-        return rating.getValue();
-    }
-
-    public Input<IntFilter> getRatingInput() {
-        return rating;
-    }
-
-    public ReviewFilter setRating(IntFilter rating) {
-        this.rating = Input.optional(rating);
-        return this;
-    }
-
-    public ReviewFilter setRatingInput(Input<IntFilter> rating) {
-        if (rating == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.rating = rating;
         return this;
     }
 
@@ -168,6 +145,17 @@ public class ReviewFilter implements Serializable {
         String separator = "";
         _queryBuilder.append('{');
 
+        if (this.name.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("name:");
+            if (name.getValue() != null) {
+                name.getValue().appendTo(_queryBuilder);
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
         if (this.id.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
@@ -183,28 +171,6 @@ public class ReviewFilter implements Serializable {
                     }
                 }
                 _queryBuilder.append(']');
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
-        if (this.comment.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("comment:");
-            if (comment.getValue() != null) {
-                comment.getValue().appendTo(_queryBuilder);
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
-        if (this.rating.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("rating:");
-            if (rating.getValue() != null) {
-                rating.getValue().appendTo(_queryBuilder);
             } else {
                 _queryBuilder.append("null");
             }

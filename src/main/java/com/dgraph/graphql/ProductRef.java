@@ -26,30 +26,82 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductRef implements Serializable {
-    private Input<ID> productId = Input.undefined();
+    private Input<ID> id = Input.undefined();
+
+    private Input<List<NamespaceRef>> namespaces = Input.undefined();
+
+    private Input<String> identifier = Input.undefined();
 
     private Input<String> name = Input.undefined();
 
-    private Input<List<ReviewRef>> reviews = Input.undefined();
+    private Input<String> alternateName = Input.undefined();
 
-    public ID getProductId() {
-        return productId.getValue();
+    private Input<String> description = Input.undefined();
+
+    private Input<Boolean> isShoppingable = Input.undefined();
+
+    private Input<List<ProductModelRef>> hasModels = Input.undefined();
+
+    public ID getId() {
+        return id.getValue();
     }
 
-    public Input<ID> getProductIdInput() {
-        return productId;
+    public Input<ID> getIdInput() {
+        return id;
     }
 
-    public ProductRef setProductId(ID productId) {
-        this.productId = Input.optional(productId);
+    public ProductRef setId(ID id) {
+        this.id = Input.optional(id);
         return this;
     }
 
-    public ProductRef setProductIdInput(Input<ID> productId) {
-        if (productId == null) {
+    public ProductRef setIdInput(Input<ID> id) {
+        if (id == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.productId = productId;
+        this.id = id;
+        return this;
+    }
+
+    public List<NamespaceRef> getNamespaces() {
+        return namespaces.getValue();
+    }
+
+    public Input<List<NamespaceRef>> getNamespacesInput() {
+        return namespaces;
+    }
+
+    public ProductRef setNamespaces(List<NamespaceRef> namespaces) {
+        this.namespaces = Input.optional(namespaces);
+        return this;
+    }
+
+    public ProductRef setNamespacesInput(Input<List<NamespaceRef>> namespaces) {
+        if (namespaces == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.namespaces = namespaces;
+        return this;
+    }
+
+    public String getIdentifier() {
+        return identifier.getValue();
+    }
+
+    public Input<String> getIdentifierInput() {
+        return identifier;
+    }
+
+    public ProductRef setIdentifier(String identifier) {
+        this.identifier = Input.optional(identifier);
+        return this;
+    }
+
+    public ProductRef setIdentifierInput(Input<String> identifier) {
+        if (identifier == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.identifier = identifier;
         return this;
     }
 
@@ -74,24 +126,87 @@ public class ProductRef implements Serializable {
         return this;
     }
 
-    public List<ReviewRef> getReviews() {
-        return reviews.getValue();
+    public String getAlternateName() {
+        return alternateName.getValue();
     }
 
-    public Input<List<ReviewRef>> getReviewsInput() {
-        return reviews;
+    public Input<String> getAlternateNameInput() {
+        return alternateName;
     }
 
-    public ProductRef setReviews(List<ReviewRef> reviews) {
-        this.reviews = Input.optional(reviews);
+    public ProductRef setAlternateName(String alternateName) {
+        this.alternateName = Input.optional(alternateName);
         return this;
     }
 
-    public ProductRef setReviewsInput(Input<List<ReviewRef>> reviews) {
-        if (reviews == null) {
+    public ProductRef setAlternateNameInput(Input<String> alternateName) {
+        if (alternateName == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.reviews = reviews;
+        this.alternateName = alternateName;
+        return this;
+    }
+
+    public String getDescription() {
+        return description.getValue();
+    }
+
+    public Input<String> getDescriptionInput() {
+        return description;
+    }
+
+    public ProductRef setDescription(String description) {
+        this.description = Input.optional(description);
+        return this;
+    }
+
+    public ProductRef setDescriptionInput(Input<String> description) {
+        if (description == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.description = description;
+        return this;
+    }
+
+    public Boolean getIsShoppingable() {
+        return isShoppingable.getValue();
+    }
+
+    public Input<Boolean> getIsShoppingableInput() {
+        return isShoppingable;
+    }
+
+    public ProductRef setIsShoppingable(Boolean isShoppingable) {
+        this.isShoppingable = Input.optional(isShoppingable);
+        return this;
+    }
+
+    public ProductRef setIsShoppingableInput(Input<Boolean> isShoppingable) {
+        if (isShoppingable == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.isShoppingable = isShoppingable;
+        return this;
+    }
+
+    public List<ProductModelRef> getHasModels() {
+        return hasModels.getValue();
+    }
+
+    public Input<List<ProductModelRef>> getHasModelsInput() {
+        return hasModels;
+    }
+
+    public ProductRef setHasModels(List<ProductModelRef> hasModels) {
+        this.hasModels = Input.optional(hasModels);
+        return this;
+    }
+
+    public ProductRef setHasModelsInput(Input<List<ProductModelRef>> hasModels) {
+        if (hasModels == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.hasModels = hasModels;
         return this;
     }
 
@@ -99,12 +214,43 @@ public class ProductRef implements Serializable {
         String separator = "";
         _queryBuilder.append('{');
 
-        if (this.productId.isDefined()) {
+        if (this.id.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("productID:");
-            if (productId.getValue() != null) {
-                Query.appendQuotedString(_queryBuilder, productId.getValue().toString());
+            _queryBuilder.append("id:");
+            if (id.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, id.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.namespaces.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("namespaces:");
+            if (namespaces.getValue() != null) {
+                _queryBuilder.append('[');
+                {
+                    String listSeperator1 = "";
+                    for (NamespaceRef item1 : namespaces.getValue()) {
+                        _queryBuilder.append(listSeperator1);
+                        listSeperator1 = ",";
+                        item1.appendTo(_queryBuilder);
+                    }
+                }
+                _queryBuilder.append(']');
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.identifier.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("identifier:");
+            if (identifier.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, identifier.getValue().toString());
             } else {
                 _queryBuilder.append("null");
             }
@@ -121,15 +267,48 @@ public class ProductRef implements Serializable {
             }
         }
 
-        if (this.reviews.isDefined()) {
+        if (this.alternateName.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("reviews:");
-            if (reviews.getValue() != null) {
+            _queryBuilder.append("alternateName:");
+            if (alternateName.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, alternateName.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.description.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("description:");
+            if (description.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, description.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.isShoppingable.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("isShoppingable:");
+            if (isShoppingable.getValue() != null) {
+                _queryBuilder.append(isShoppingable.getValue());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.hasModels.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("hasModels:");
+            if (hasModels.getValue() != null) {
                 _queryBuilder.append('[');
                 {
                     String listSeperator1 = "";
-                    for (ReviewRef item1 : reviews.getValue()) {
+                    for (ProductModelRef item1 : hasModels.getValue()) {
                         _queryBuilder.append(listSeperator1);
                         listSeperator1 = ",";
                         item1.appendTo(_queryBuilder);

@@ -22,9 +22,11 @@ import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 
 public class GraphClient {
     private HttpResponseParser httpResponseParser;
+
     private GraphClient() {
         httpResponseParser = new HttpResponseParser();
     }
+
     private String url;
     private Map<String, String> headers;
     private OkHttpClient okHttpClient;
@@ -33,7 +35,7 @@ public class GraphClient {
         return new Builder();
     }
 
-   public static class Builder {
+    public static class Builder {
 
         private static GraphClient graphClient;
 
@@ -94,6 +96,22 @@ public class GraphClient {
         });
     }
 
+    public QueryRoot queryGraphSynchronize(final QueryRootQuery queryRootQuery) throws Exception {
+        String queryString = queryRootQuery.toString();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("query", queryString);
+        Response response = OkHttpUtils.doRequestBody(headers, url, jsonObject.toString());
+        return httpResponseParser.parseQueryRoot(response);
+
+    }
+
+    public Mutation mutateGraphSynchronize(MutationQuery mutationQuery) throws Exception {
+        String queryString = mutationQuery.toString();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("query", queryString);
+        Response response = OkHttpUtils.doRequestBody(headers, url, jsonObject.toString());
+        return httpResponseParser.parseMutation(response);
+    }
 
     public Single<Mutation> mutateGraph(MutationQuery mutationQuery) {
         return Single.create(new SingleOnSubscribe<Mutation>() {

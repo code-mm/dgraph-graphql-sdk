@@ -32,12 +32,42 @@ public enum ReviewOrderable {
     /**
     * 
     */
-    COMMENT,
+    ALTERNATE_NAME,
 
     /**
     * 
     */
-    RATING,
+    DATE_CREATED,
+
+    /**
+    * 
+    */
+    DESCRIPTION,
+
+    /**
+    * 
+    */
+    IDENTIFIER,
+
+    /**
+    * 
+    */
+    NAME,
+
+    /**
+    * 
+    */
+    RATING_VALUE,
+
+    /**
+    * 
+    */
+    REVIEW_ASPECT,
+
+    /**
+    * 
+    */
+    REVIEW_BODY,
 
     UNKNOWN_VALUE;
 
@@ -47,12 +77,36 @@ public enum ReviewOrderable {
         }
 
         switch (value) {
-            case "comment": {
-                return COMMENT;
+            case "alternateName": {
+                return ALTERNATE_NAME;
             }
 
-            case "rating": {
-                return RATING;
+            case "dateCreated": {
+                return DATE_CREATED;
+            }
+
+            case "description": {
+                return DESCRIPTION;
+            }
+
+            case "identifier": {
+                return IDENTIFIER;
+            }
+
+            case "name": {
+                return NAME;
+            }
+
+            case "ratingValue": {
+                return RATING_VALUE;
+            }
+
+            case "reviewAspect": {
+                return REVIEW_ASPECT;
+            }
+
+            case "reviewBody": {
+                return REVIEW_BODY;
             }
 
             default: {
@@ -62,12 +116,36 @@ public enum ReviewOrderable {
     }
     public String toString() {
         switch (this) {
-            case COMMENT: {
-                return "comment";
+            case ALTERNATE_NAME: {
+                return "alternateName";
             }
 
-            case RATING: {
-                return "rating";
+            case DATE_CREATED: {
+                return "dateCreated";
+            }
+
+            case DESCRIPTION: {
+                return "description";
+            }
+
+            case IDENTIFIER: {
+                return "identifier";
+            }
+
+            case NAME: {
+                return "name";
+            }
+
+            case RATING_VALUE: {
+                return "ratingValue";
+            }
+
+            case REVIEW_ASPECT: {
+                return "reviewAspect";
+            }
+
+            case REVIEW_BODY: {
+                return "reviewBody";
             }
 
             default: {

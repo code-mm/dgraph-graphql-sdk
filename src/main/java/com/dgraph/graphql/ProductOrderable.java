@@ -32,6 +32,21 @@ public enum ProductOrderable {
     /**
     * 
     */
+    ALTERNATE_NAME,
+
+    /**
+    * 
+    */
+    DESCRIPTION,
+
+    /**
+    * 
+    */
+    IDENTIFIER,
+
+    /**
+    * 
+    */
     NAME,
 
     UNKNOWN_VALUE;
@@ -42,6 +57,18 @@ public enum ProductOrderable {
         }
 
         switch (value) {
+            case "alternateName": {
+                return ALTERNATE_NAME;
+            }
+
+            case "description": {
+                return DESCRIPTION;
+            }
+
+            case "identifier": {
+                return IDENTIFIER;
+            }
+
             case "name": {
                 return NAME;
             }
@@ -53,6 +80,18 @@ public enum ProductOrderable {
     }
     public String toString() {
         switch (this) {
+            case ALTERNATE_NAME: {
+                return "alternateName";
+            }
+
+            case DESCRIPTION: {
+                return "description";
+            }
+
+            case IDENTIFIER: {
+                return "identifier";
+            }
+
             case NAME: {
                 return "name";
             }

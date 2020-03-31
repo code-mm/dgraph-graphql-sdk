@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductFilter implements Serializable {
-    private Input<List<ID>> productId = Input.undefined();
+    private Input<StringHashFilter> name = Input.undefined();
 
-    private Input<StringTermFilter> name = Input.undefined();
+    private Input<List<ID>> id = Input.undefined();
 
     private Input<ProductFilter> and = Input.undefined();
 
@@ -36,45 +36,45 @@ public class ProductFilter implements Serializable {
 
     private Input<ProductFilter> not = Input.undefined();
 
-    public List<ID> getProductId() {
-        return productId.getValue();
-    }
-
-    public Input<List<ID>> getProductIdInput() {
-        return productId;
-    }
-
-    public ProductFilter setProductId(List<ID> productId) {
-        this.productId = Input.optional(productId);
-        return this;
-    }
-
-    public ProductFilter setProductIdInput(Input<List<ID>> productId) {
-        if (productId == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.productId = productId;
-        return this;
-    }
-
-    public StringTermFilter getName() {
+    public StringHashFilter getName() {
         return name.getValue();
     }
 
-    public Input<StringTermFilter> getNameInput() {
+    public Input<StringHashFilter> getNameInput() {
         return name;
     }
 
-    public ProductFilter setName(StringTermFilter name) {
+    public ProductFilter setName(StringHashFilter name) {
         this.name = Input.optional(name);
         return this;
     }
 
-    public ProductFilter setNameInput(Input<StringTermFilter> name) {
+    public ProductFilter setNameInput(Input<StringHashFilter> name) {
         if (name == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.name = name;
+        return this;
+    }
+
+    public List<ID> getId() {
+        return id.getValue();
+    }
+
+    public Input<List<ID>> getIdInput() {
+        return id;
+    }
+
+    public ProductFilter setId(List<ID> id) {
+        this.id = Input.optional(id);
+        return this;
+    }
+
+    public ProductFilter setIdInput(Input<List<ID>> id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.id = id;
         return this;
     }
 
@@ -145,32 +145,32 @@ public class ProductFilter implements Serializable {
         String separator = "";
         _queryBuilder.append('{');
 
-        if (this.productId.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("productID:");
-            if (productId.getValue() != null) {
-                _queryBuilder.append('[');
-                {
-                    String listSeperator1 = "";
-                    for (ID item1 : productId.getValue()) {
-                        _queryBuilder.append(listSeperator1);
-                        listSeperator1 = ",";
-                        Query.appendQuotedString(_queryBuilder, item1.toString());
-                    }
-                }
-                _queryBuilder.append(']');
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
         if (this.name.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
             _queryBuilder.append("name:");
             if (name.getValue() != null) {
                 name.getValue().appendTo(_queryBuilder);
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.id.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("id:");
+            if (id.getValue() != null) {
+                _queryBuilder.append('[');
+                {
+                    String listSeperator1 = "";
+                    for (ID item1 : id.getValue()) {
+                        _queryBuilder.append(listSeperator1);
+                        listSeperator1 = ",";
+                        Query.appendQuotedString(_queryBuilder, item1.toString());
+                    }
+                }
+                _queryBuilder.append(']');
             } else {
                 _queryBuilder.append("null");
             }

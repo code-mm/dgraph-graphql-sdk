@@ -26,49 +26,156 @@ import java.util.List;
 import java.util.Map;
 
 public class AddProductInput implements Serializable {
-    private Input<String> name = Input.undefined();
+    private String name;
 
-    private Input<List<ReviewRef>> reviews = Input.undefined();
+    private Input<List<NamespaceRef>> namespaces = Input.undefined();
 
-    public String getName() {
-        return name.getValue();
+    private Input<String> identifier = Input.undefined();
+
+    private Input<String> alternateName = Input.undefined();
+
+    private Input<String> description = Input.undefined();
+
+    private Input<Boolean> isShoppingable = Input.undefined();
+
+    private Input<List<ProductModelRef>> hasModels = Input.undefined();
+
+    public AddProductInput(String name) {
+        this.name = name;
     }
 
-    public Input<String> getNameInput() {
+    public String getName() {
         return name;
     }
 
     public AddProductInput setName(String name) {
-        this.name = Input.optional(name);
-        return this;
-    }
-
-    public AddProductInput setNameInput(Input<String> name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
         this.name = name;
         return this;
     }
 
-    public List<ReviewRef> getReviews() {
-        return reviews.getValue();
+    public List<NamespaceRef> getNamespaces() {
+        return namespaces.getValue();
     }
 
-    public Input<List<ReviewRef>> getReviewsInput() {
-        return reviews;
+    public Input<List<NamespaceRef>> getNamespacesInput() {
+        return namespaces;
     }
 
-    public AddProductInput setReviews(List<ReviewRef> reviews) {
-        this.reviews = Input.optional(reviews);
+    public AddProductInput setNamespaces(List<NamespaceRef> namespaces) {
+        this.namespaces = Input.optional(namespaces);
         return this;
     }
 
-    public AddProductInput setReviewsInput(Input<List<ReviewRef>> reviews) {
-        if (reviews == null) {
+    public AddProductInput setNamespacesInput(Input<List<NamespaceRef>> namespaces) {
+        if (namespaces == null) {
             throw new IllegalArgumentException("Input can not be null");
         }
-        this.reviews = reviews;
+        this.namespaces = namespaces;
+        return this;
+    }
+
+    public String getIdentifier() {
+        return identifier.getValue();
+    }
+
+    public Input<String> getIdentifierInput() {
+        return identifier;
+    }
+
+    public AddProductInput setIdentifier(String identifier) {
+        this.identifier = Input.optional(identifier);
+        return this;
+    }
+
+    public AddProductInput setIdentifierInput(Input<String> identifier) {
+        if (identifier == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.identifier = identifier;
+        return this;
+    }
+
+    public String getAlternateName() {
+        return alternateName.getValue();
+    }
+
+    public Input<String> getAlternateNameInput() {
+        return alternateName;
+    }
+
+    public AddProductInput setAlternateName(String alternateName) {
+        this.alternateName = Input.optional(alternateName);
+        return this;
+    }
+
+    public AddProductInput setAlternateNameInput(Input<String> alternateName) {
+        if (alternateName == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.alternateName = alternateName;
+        return this;
+    }
+
+    public String getDescription() {
+        return description.getValue();
+    }
+
+    public Input<String> getDescriptionInput() {
+        return description;
+    }
+
+    public AddProductInput setDescription(String description) {
+        this.description = Input.optional(description);
+        return this;
+    }
+
+    public AddProductInput setDescriptionInput(Input<String> description) {
+        if (description == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.description = description;
+        return this;
+    }
+
+    public Boolean getIsShoppingable() {
+        return isShoppingable.getValue();
+    }
+
+    public Input<Boolean> getIsShoppingableInput() {
+        return isShoppingable;
+    }
+
+    public AddProductInput setIsShoppingable(Boolean isShoppingable) {
+        this.isShoppingable = Input.optional(isShoppingable);
+        return this;
+    }
+
+    public AddProductInput setIsShoppingableInput(Input<Boolean> isShoppingable) {
+        if (isShoppingable == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.isShoppingable = isShoppingable;
+        return this;
+    }
+
+    public List<ProductModelRef> getHasModels() {
+        return hasModels.getValue();
+    }
+
+    public Input<List<ProductModelRef>> getHasModelsInput() {
+        return hasModels;
+    }
+
+    public AddProductInput setHasModels(List<ProductModelRef> hasModels) {
+        this.hasModels = Input.optional(hasModels);
+        return this;
+    }
+
+    public AddProductInput setHasModelsInput(Input<List<ProductModelRef>> hasModels) {
+        if (hasModels == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.hasModels = hasModels;
         return this;
     }
 
@@ -76,26 +183,84 @@ public class AddProductInput implements Serializable {
         String separator = "";
         _queryBuilder.append('{');
 
-        if (this.name.isDefined()) {
+        _queryBuilder.append(separator);
+        separator = ",";
+        _queryBuilder.append("name:");
+        Query.appendQuotedString(_queryBuilder, name.toString());
+
+        if (this.namespaces.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("name:");
-            if (name.getValue() != null) {
-                Query.appendQuotedString(_queryBuilder, name.getValue().toString());
+            _queryBuilder.append("namespaces:");
+            if (namespaces.getValue() != null) {
+                _queryBuilder.append('[');
+                {
+                    String listSeperator1 = "";
+                    for (NamespaceRef item1 : namespaces.getValue()) {
+                        _queryBuilder.append(listSeperator1);
+                        listSeperator1 = ",";
+                        item1.appendTo(_queryBuilder);
+                    }
+                }
+                _queryBuilder.append(']');
             } else {
                 _queryBuilder.append("null");
             }
         }
 
-        if (this.reviews.isDefined()) {
+        if (this.identifier.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
-            _queryBuilder.append("reviews:");
-            if (reviews.getValue() != null) {
+            _queryBuilder.append("identifier:");
+            if (identifier.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, identifier.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.alternateName.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("alternateName:");
+            if (alternateName.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, alternateName.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.description.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("description:");
+            if (description.getValue() != null) {
+                Query.appendQuotedString(_queryBuilder, description.getValue().toString());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.isShoppingable.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("isShoppingable:");
+            if (isShoppingable.getValue() != null) {
+                _queryBuilder.append(isShoppingable.getValue());
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.hasModels.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("hasModels:");
+            if (hasModels.getValue() != null) {
                 _queryBuilder.append('[');
                 {
                     String listSeperator1 = "";
-                    for (ReviewRef item1 : reviews.getValue()) {
+                    for (ProductModelRef item1 : hasModels.getValue()) {
                         _queryBuilder.append(listSeperator1);
                         listSeperator1 = ",";
                         item1.appendTo(_queryBuilder);
