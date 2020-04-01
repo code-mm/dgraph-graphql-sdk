@@ -30,3 +30,4 @@ package-lock.json
 **/bin
 build
 .gradle
+GemFile.lock
