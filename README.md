@@ -1,30 +1,42 @@
-# 环境准备
-
-- 安装ruby (下载地址 https://rubyinstaller.org/downloads/)
-
-# 安装dgraph
-
-- dgraph 文档 https://graphql.dgraph.io/docs/quick-start/
-
-- Rect 工具 https://play.dgraph.io/
-
-# 下载schema.json
-
-- 借助apollographql下载 schema.json
-
-        ./gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://192.168.0.43:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
-        
-  
 # windows 一键部署
 
     deploy.bat  
+
+# unix 
+
+    ./deploy.sh
+
 
 # 测试项目地址
 
 https://github.com/m-maohuawei/dgraph-graphql-sdk-test.git
 
+## example  (需要根据实际生产的文件操作，复制下面代码可能有错误)
 
-## 使用example 
+### 同步
+
+
+        QueryRootQuery query = Operations.query(queryRootQuery -> queryRootQuery.getUser(getUserArguments -> {
+            getUserArguments.username(email);
+        }, userQuery -> {
+            userQuery.id();
+            userQuery.name();
+            userQuery.username();
+        }));
+
+        log.info("查询语句 : " + query.toString());
+
+        QueryRoot queryRoot = graphQLConfiguration.graphClient().queryGraphSynchronize(
+                query
+        );
+
+        User user = queryRoot.getGetUser();
+
+        log.info("查询结果 : user : id : " + user.getId() + " username : " + user.getUsername());
+
+
+
+### 异步
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
@@ -100,3 +112,5 @@ https://github.com/m-maohuawei/dgraph-graphql-sdk-test.git
                         System.out.println(e.getMessage());
                     }
                 });
+
+
