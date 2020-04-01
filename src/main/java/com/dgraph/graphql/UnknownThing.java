@@ -92,12 +92,6 @@ public class UnknownThing extends AbstractResponse<UnknownThing> implements Thin
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "__typename": {
                     responseData.put(key, jsonAsString(field.getValue(), key));
                     break;
@@ -112,6 +106,22 @@ public class UnknownThing extends AbstractResponse<UnknownThing> implements Thin
     public static Thing create(JsonObject fields) throws SchemaViolationError {
         String typeName = fields.getAsJsonPrimitive("__typename").getAsString();
         switch (typeName) {
+            case "Cart": {
+                return new Cart(fields);
+            }
+
+            case "CartItem": {
+                return new CartItem(fields);
+            }
+
+            case "Checkout": {
+                return new Checkout(fields);
+            }
+
+            case "CheckoutItem": {
+                return new CheckoutItem(fields);
+            }
+
             case "Conversation": {
                 return new Conversation(fields);
             }
@@ -162,6 +172,14 @@ public class UnknownThing extends AbstractResponse<UnknownThing> implements Thin
 
             case "Person": {
                 return new Person(fields);
+            }
+
+            case "Poder": {
+                return new Poder(fields);
+            }
+
+            case "PoderItem": {
+                return new PoderItem(fields);
             }
 
             case "Product": {
@@ -272,20 +290,6 @@ public class UnknownThing extends AbstractResponse<UnknownThing> implements Thin
         return this;
     }
 
-    /**
-    * The id of the thing.
-    * The id: ID! in Thing means that an auto-generated ID by Dgraph will be used to identify things.
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public UnknownThing setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
             case "namespaces": return true;
@@ -297,8 +301,6 @@ public class UnknownThing extends AbstractResponse<UnknownThing> implements Thin
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             default: return false;
         }

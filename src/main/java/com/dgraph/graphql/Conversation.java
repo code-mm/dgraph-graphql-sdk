@@ -30,7 +30,7 @@ import java.util.Map;
 * organizations or people on a particular topic. Individual messages can be linked to the conversation
 * with isPartOf or hasPart properties.
 */
-public class Conversation extends AbstractResponse<Conversation> implements Thing {
+public class Conversation extends AbstractResponse<Conversation> implements Node, Thing {
     public Conversation() {
     }
 
@@ -39,6 +39,12 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -90,12 +96,6 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -208,8 +208,21 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
         }
     }
 
+    public Conversation(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Conversation";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -274,19 +287,6 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
 
     public Conversation setDescription(String arg) {
         optimisticData.put(getKey("description"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Conversation setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
         return this;
     }
 
@@ -358,7 +358,7 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
     }
 
     /**
-    * 参照 hasPart【作品组件】 表示某个作品是该作品的一部分 
+    * 参照 hasPart【作品组件】 表示某个作品是该作品的一部分
     */
 
     public List<Message> getHasMessages() {
@@ -385,6 +385,8 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -394,8 +396,6 @@ public class Conversation extends AbstractResponse<Conversation> implements Thin
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "about": return false;
 

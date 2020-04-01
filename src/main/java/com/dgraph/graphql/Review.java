@@ -30,7 +30,7 @@ import java.util.Map;
 * - for example, a comment on a blog post. The comment's content is expressed via the text property,
 * and its topic via about, properties shared with all CreativeWorks.
 */
-public class Review extends AbstractResponse<Review> implements Thing {
+public class Review extends AbstractResponse<Review> implements Node, Thing {
     public Review() {
     }
 
@@ -39,6 +39,12 @@ public class Review extends AbstractResponse<Review> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -90,12 +96,6 @@ public class Review extends AbstractResponse<Review> implements Thing {
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -177,8 +177,21 @@ public class Review extends AbstractResponse<Review> implements Thing {
         }
     }
 
+    public Review(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Review";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -247,20 +260,7 @@ public class Review extends AbstractResponse<Review> implements Thing {
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Review setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
-    * itemReviewed	Thing 	The item that is being reviewed/rated.
+    * itemReviewed    Thing    The item that is being reviewed/rated.
     */
 
     public Thing getItemReviewed() {
@@ -273,7 +273,7 @@ public class Review extends AbstractResponse<Review> implements Thing {
     }
 
     /**
-    * reviewAspect	Text 	This Review or Rating is relevant to this part or facet of the itemReviewed.
+    * reviewAspect    Text    This Review or Rating is relevant to this part or facet of the itemReviewed.
     */
 
     public String getReviewAspect() {
@@ -286,7 +286,7 @@ public class Review extends AbstractResponse<Review> implements Thing {
     }
 
     /**
-    * reviewBody	Text 	The actual body of the review.
+    * reviewBody    Text    The actual body of the review.
     */
 
     public String getReviewBody() {
@@ -299,7 +299,7 @@ public class Review extends AbstractResponse<Review> implements Thing {
     }
 
     /**
-    * ratingValue	评分 The rating for the content.
+    * ratingValue    评分 The rating for the content.
     */
 
     public Integer getRatingValue() {
@@ -325,7 +325,7 @@ public class Review extends AbstractResponse<Review> implements Thing {
     }
 
     /**
-    * 【创建日期】 创作出CreativeWork的日期。 
+    * 【创建日期】 创作出CreativeWork的日期。
     */
 
     public DateTime getDateCreated() {
@@ -339,6 +339,8 @@ public class Review extends AbstractResponse<Review> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -348,8 +350,6 @@ public class Review extends AbstractResponse<Review> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "itemReviewed": return false;
 

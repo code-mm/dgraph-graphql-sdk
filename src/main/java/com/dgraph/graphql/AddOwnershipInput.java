@@ -36,8 +36,6 @@ public class AddOwnershipInput implements Serializable {
 
     private Input<String> description = Input.undefined();
 
-    private Input<ThingRef> owned = Input.undefined();
-
     private Input<DateTime> dateFrom = Input.undefined();
 
     private Input<DateTime> dateThrough = Input.undefined();
@@ -136,27 +134,6 @@ public class AddOwnershipInput implements Serializable {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.description = description;
-        return this;
-    }
-
-    public ThingRef getOwned() {
-        return owned.getValue();
-    }
-
-    public Input<ThingRef> getOwnedInput() {
-        return owned;
-    }
-
-    public AddOwnershipInput setOwned(ThingRef owned) {
-        this.owned = Input.optional(owned);
-        return this;
-    }
-
-    public AddOwnershipInput setOwnedInput(Input<ThingRef> owned) {
-        if (owned == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.owned = owned;
         return this;
     }
 
@@ -259,17 +236,6 @@ public class AddOwnershipInput implements Serializable {
             _queryBuilder.append("description:");
             if (description.getValue() != null) {
                 Query.appendQuotedString(_queryBuilder, description.getValue().toString());
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
-        if (this.owned.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("owned:");
-            if (owned.getValue() != null) {
-                owned.getValue().appendTo(_queryBuilder);
             } else {
                 _queryBuilder.append("null");
             }

@@ -32,6 +32,8 @@ import java.util.Map;
 public class NamespaceQuery extends Query<NamespaceQuery> {
     NamespaceQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -144,15 +146,6 @@ public class NamespaceQuery extends Query<NamespaceQuery> {
     */
     public NamespaceQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public NamespaceQuery id() {
-        startField("id");
 
         return this;
     }

@@ -31,6 +31,8 @@ import java.util.Map;
 public class ProductQuery extends Query<ProductQuery> {
     ProductQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -143,15 +145,6 @@ public class ProductQuery extends Query<ProductQuery> {
     */
     public ProductQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public ProductQuery id() {
-        startField("id");
 
         return this;
     }

@@ -33,6 +33,8 @@ import java.util.Map;
 public class ReviewQuery extends Query<ReviewQuery> {
     ReviewQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -149,15 +151,6 @@ public class ReviewQuery extends Query<ReviewQuery> {
         return this;
     }
 
-    /**
-    * 
-    */
-    public ReviewQuery id() {
-        startField("id");
-
-        return this;
-    }
-
     public class ItemReviewedArguments extends Arguments {
         ItemReviewedArguments(StringBuilder _queryBuilder) {
             super(_queryBuilder, true);
@@ -180,14 +173,14 @@ public class ReviewQuery extends Query<ReviewQuery> {
     }
 
     /**
-    * itemReviewed	Thing 	The item that is being reviewed/rated.
+    * itemReviewed    Thing    The item that is being reviewed/rated.
     */
     public ReviewQuery itemReviewed(ThingQueryDefinition queryDef) {
         return itemReviewed(args -> {}, queryDef);
     }
 
     /**
-    * itemReviewed	Thing 	The item that is being reviewed/rated.
+    * itemReviewed    Thing    The item that is being reviewed/rated.
     */
     public ReviewQuery itemReviewed(ItemReviewedArgumentsDefinition argsDef, ThingQueryDefinition queryDef) {
         startField("itemReviewed");
@@ -204,7 +197,7 @@ public class ReviewQuery extends Query<ReviewQuery> {
     }
 
     /**
-    * reviewAspect	Text 	This Review or Rating is relevant to this part or facet of the itemReviewed.
+    * reviewAspect    Text    This Review or Rating is relevant to this part or facet of the itemReviewed.
     */
     public ReviewQuery reviewAspect() {
         startField("reviewAspect");
@@ -213,7 +206,7 @@ public class ReviewQuery extends Query<ReviewQuery> {
     }
 
     /**
-    * reviewBody	Text 	The actual body of the review.
+    * reviewBody    Text    The actual body of the review.
     */
     public ReviewQuery reviewBody() {
         startField("reviewBody");
@@ -222,7 +215,7 @@ public class ReviewQuery extends Query<ReviewQuery> {
     }
 
     /**
-    * ratingValue	评分 The rating for the content.
+    * ratingValue    评分 The rating for the content.
     */
     public ReviewQuery ratingValue() {
         startField("ratingValue");
@@ -276,7 +269,7 @@ public class ReviewQuery extends Query<ReviewQuery> {
     }
 
     /**
-    * 【创建日期】 创作出CreativeWork的日期。 
+    * 【创建日期】 创作出CreativeWork的日期。
     */
     public ReviewQuery dateCreated() {
         startField("dateCreated");

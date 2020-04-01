@@ -31,6 +31,8 @@ import java.util.Map;
 public class FollowerRoleQuery extends Query<FollowerRoleQuery> {
     FollowerRoleQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class PersonArguments extends Arguments {
@@ -251,15 +253,6 @@ public class FollowerRoleQuery extends Query<FollowerRoleQuery> {
     */
     public FollowerRoleQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public FollowerRoleQuery id() {
-        startField("id");
 
         return this;
     }

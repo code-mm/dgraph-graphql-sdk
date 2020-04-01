@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * [【雇员角色】OrganizationRole的子类，描述雇员关系,有时间限制](http://cnschema.org/EmployeeRole)
 */
-public class EmployeeRole extends AbstractResponse<EmployeeRole> implements PartyRole, Thing {
+public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Node, PartyRole, Thing {
     public EmployeeRole() {
     }
 
@@ -77,6 +77,12 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
                     }
 
                     responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -136,12 +142,6 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "number": {
                     String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -162,6 +162,11 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
                 }
             }
         }
+    }
+
+    public EmployeeRole(ID id) {
+        this();
+        optimisticData.put("id", id);
     }
 
     public String getGraphQlTypeName() {
@@ -218,6 +223,14 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
     public EmployeeRole setDateThrough(DateTime arg) {
         optimisticData.put(getKey("dateThrough"), arg);
         return this;
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -286,19 +299,6 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public EmployeeRole setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 【员工编号】
     */
 
@@ -321,6 +321,8 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
 
             case "dateThrough": return false;
 
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -330,8 +332,6 @@ public class EmployeeRole extends AbstractResponse<EmployeeRole> implements Part
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "number": return false;
 

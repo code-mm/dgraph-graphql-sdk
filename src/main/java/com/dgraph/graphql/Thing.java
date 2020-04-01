@@ -41,7 +41,5 @@ public interface Thing {
     String getAlternateName();
 
     String getDescription();
-
-    ID getId();
 }
 

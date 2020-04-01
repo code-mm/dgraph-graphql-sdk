@@ -31,6 +31,8 @@ import java.util.Map;
 public class UserQuery extends Query<UserQuery> {
     UserQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -143,15 +145,6 @@ public class UserQuery extends Query<UserQuery> {
     */
     public UserQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public UserQuery id() {
-        startField("id");
 
         return this;
     }

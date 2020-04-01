@@ -31,6 +31,8 @@ import java.util.Map;
 public class MessageQuery extends Query<MessageQuery> {
     MessageQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class HasReadNotesArguments extends Arguments {
@@ -221,15 +223,6 @@ public class MessageQuery extends Query<MessageQuery> {
     */
     public MessageQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public MessageQuery id() {
-        startField("id");
 
         return this;
     }
@@ -570,14 +563,14 @@ public class MessageQuery extends Query<MessageQuery> {
     }
 
     /**
-    * 【评论】 评论，一般是用户对CreativeWork的评论。 
+    * 【评论】 评论，一般是用户对CreativeWork的评论。
     */
     public MessageQuery hasReviews(ReviewQueryDefinition queryDef) {
         return hasReviews(args -> {}, queryDef);
     }
 
     /**
-    * 【评论】 评论，一般是用户对CreativeWork的评论。 
+    * 【评论】 评论，一般是用户对CreativeWork的评论。
     */
     public MessageQuery hasReviews(HasReviewsArgumentsDefinition argsDef, ReviewQueryDefinition queryDef) {
         startField("hasReviews");

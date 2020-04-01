@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * http://cnschema.org/EntryPoint 入口】一个入口，包含一些基于web的协议 An entry point, within some Web-based protocol.
 */
-public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
+public class EntryPoint extends AbstractResponse<EntryPoint> implements Node, Thing {
     public EntryPoint() {
     }
 
@@ -37,6 +37,12 @@ public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -92,12 +98,6 @@ public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "urlTemplate": {
                     String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -120,8 +120,21 @@ public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
         }
     }
 
+    public EntryPoint(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "EntryPoint";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -190,19 +203,6 @@ public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public EntryPoint setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 【链接模版】 一个URL的模版，可以利用变化参数形成完整的URL。 An url template (RFC6570) that will be used to construct the
     * target of the execution of the action.
     */
@@ -218,6 +218,8 @@ public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -227,8 +229,6 @@ public class EntryPoint extends AbstractResponse<EntryPoint> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "urlTemplate": return false;
 

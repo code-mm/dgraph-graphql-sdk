@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * [【会员角色】OrganizationRole的子类，描述会员关系,有时间限制](http://cnschema.org/EmployeeRole)
 */
-public class MemberRole extends AbstractResponse<MemberRole> implements PartyRole, Thing {
+public class MemberRole extends AbstractResponse<MemberRole> implements Node, PartyRole, Thing {
     public MemberRole() {
     }
 
@@ -77,6 +77,12 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
                     }
 
                     responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -136,12 +142,6 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "number": {
                     String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -162,6 +162,11 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
                 }
             }
         }
+    }
+
+    public MemberRole(ID id) {
+        this();
+        optimisticData.put("id", id);
     }
 
     public String getGraphQlTypeName() {
@@ -218,6 +223,14 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
     public MemberRole setDateThrough(DateTime arg) {
         optimisticData.put(getKey("dateThrough"), arg);
         return this;
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -286,19 +299,6 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public MemberRole setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 【会员编号】
     */
 
@@ -321,6 +321,8 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
 
             case "dateThrough": return false;
 
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -330,8 +332,6 @@ public class MemberRole extends AbstractResponse<MemberRole> implements PartyRol
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "number": return false;
 

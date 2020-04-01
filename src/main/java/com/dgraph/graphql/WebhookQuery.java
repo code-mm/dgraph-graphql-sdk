@@ -27,11 +27,13 @@ import java.util.Map;
 
 /**
 * 网络钩子是“用户定义的HTTP回调”。[2]网络钩子通常被某些事件激活，比如将代码推送到源[3]或评论博客。[4]当此事件发生时，原网站将向为网络钩子配置的URL发送HTTP请求。用户可配置它们引发网
-* 页上的事件以调用另一个网站的行为。Webhooks allow external services to be notified when certain events happen. 
+* 页上的事件以调用另一个网站的行为。Webhooks allow external services to be notified when certain events happen.
 */
 public class WebhookQuery extends Query<WebhookQuery> {
     WebhookQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -149,15 +151,6 @@ public class WebhookQuery extends Query<WebhookQuery> {
     }
 
     /**
-    * 
-    */
-    public WebhookQuery id() {
-        startField("id");
-
-        return this;
-    }
-
-    /**
     * 回调url
     */
     public WebhookQuery payloadUrl() {
@@ -231,7 +224,7 @@ public class WebhookQuery extends Query<WebhookQuery> {
 
     /**
     * 【创建日期】 创作出CreativeWork的日期。 The date on which the CreativeWork was created or the item was added to a
-    * DataFeed. dateCreated	DateTime or Date or DataFeedItem or CreativeWork
+    * DataFeed. dateCreated    DateTime or Date or DataFeedItem or CreativeWork
     */
     public WebhookQuery dateCreated() {
         startField("dateCreated");
@@ -261,14 +254,14 @@ public class WebhookQuery extends Query<WebhookQuery> {
     }
 
     /**
-    * 调用此webhook的客户端 
+    * 调用此webhook的客户端
     */
     public WebhookQuery client(SoftwareApplicationQueryDefinition queryDef) {
         return client(args -> {}, queryDef);
     }
 
     /**
-    * 调用此webhook的客户端 
+    * 调用此webhook的客户端
     */
     public WebhookQuery client(ClientArgumentsDefinition argsDef, SoftwareApplicationQueryDefinition queryDef) {
         startField("client");

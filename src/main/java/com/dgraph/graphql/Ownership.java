@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 描述产品的所有者或所属机构的信息
 */
-public class Ownership extends AbstractResponse<Ownership> implements Thing {
+public class Ownership extends AbstractResponse<Ownership> implements Node, Thing {
     public Ownership() {
     }
 
@@ -37,6 +37,12 @@ public class Ownership extends AbstractResponse<Ownership> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -88,12 +94,6 @@ public class Ownership extends AbstractResponse<Ownership> implements Thing {
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -164,8 +164,21 @@ public class Ownership extends AbstractResponse<Ownership> implements Thing {
         }
     }
 
+    public Ownership(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Ownership";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -230,19 +243,6 @@ public class Ownership extends AbstractResponse<Ownership> implements Thing {
 
     public Ownership setDescription(String arg) {
         optimisticData.put(getKey("description"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Ownership setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
         return this;
     }
 
@@ -313,6 +313,8 @@ public class Ownership extends AbstractResponse<Ownership> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -322,8 +324,6 @@ public class Ownership extends AbstractResponse<Ownership> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "acquiredFrom": return false;
 

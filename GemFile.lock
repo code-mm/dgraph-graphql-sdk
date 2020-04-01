@@ -10,6 +10,7 @@ GEM
     graphql_schema (0.1.6)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES

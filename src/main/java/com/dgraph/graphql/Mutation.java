@@ -37,6 +37,17 @@ public class Mutation extends AbstractResponse<Mutation> {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "deleteNode": {
+                    DeleteNodePayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeleteNodePayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
                 case "updateThing": {
                     UpdateThingPayload optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -752,6 +763,204 @@ public class Mutation extends AbstractResponse<Mutation> {
                     break;
                 }
 
+                case "addCart": {
+                    AddCartPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new AddCartPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "updateCart": {
+                    UpdateCartPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new UpdateCartPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "deleteCart": {
+                    DeleteCartPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeleteCartPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "addCartItem": {
+                    AddCartItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new AddCartItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "updateCartItem": {
+                    UpdateCartItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new UpdateCartItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "deleteCartItem": {
+                    DeleteCartItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeleteCartItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "addCheckout": {
+                    AddCheckoutPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new AddCheckoutPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "updateCheckout": {
+                    UpdateCheckoutPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new UpdateCheckoutPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "deleteCheckout": {
+                    DeleteCheckoutPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeleteCheckoutPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "addCheckoutItem": {
+                    AddCheckoutItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new AddCheckoutItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "updateCheckoutItem": {
+                    UpdateCheckoutItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new UpdateCheckoutItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "deleteCheckoutItem": {
+                    DeleteCheckoutItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeleteCheckoutItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "addPoder": {
+                    AddPoderPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new AddPoderPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "updatePoder": {
+                    UpdatePoderPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new UpdatePoderPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "deletePoder": {
+                    DeletePoderPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeletePoderPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "addPoderItem": {
+                    AddPoderItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new AddPoderItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "updatePoderItem": {
+                    UpdatePoderItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new UpdatePoderItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "deletePoderItem": {
+                    DeletePoderItemPayload optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new DeletePoderItemPayload(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
                 case "__typename": {
                     responseData.put(key, jsonAsString(field.getValue(), key));
                     break;
@@ -765,6 +974,19 @@ public class Mutation extends AbstractResponse<Mutation> {
 
     public String getGraphQlTypeName() {
         return "Mutation";
+    }
+
+    /**
+    * 
+    */
+
+    public DeleteNodePayload getDeleteNode() {
+        return (DeleteNodePayload) get("deleteNode");
+    }
+
+    public Mutation setDeleteNode(DeleteNodePayload arg) {
+        optimisticData.put(getKey("deleteNode"), arg);
+        return this;
     }
 
     /**
@@ -1612,8 +1834,244 @@ public class Mutation extends AbstractResponse<Mutation> {
         return this;
     }
 
+    /**
+    * 
+    */
+
+    public AddCartPayload getAddCart() {
+        return (AddCartPayload) get("addCart");
+    }
+
+    public Mutation setAddCart(AddCartPayload arg) {
+        optimisticData.put(getKey("addCart"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public UpdateCartPayload getUpdateCart() {
+        return (UpdateCartPayload) get("updateCart");
+    }
+
+    public Mutation setUpdateCart(UpdateCartPayload arg) {
+        optimisticData.put(getKey("updateCart"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public DeleteCartPayload getDeleteCart() {
+        return (DeleteCartPayload) get("deleteCart");
+    }
+
+    public Mutation setDeleteCart(DeleteCartPayload arg) {
+        optimisticData.put(getKey("deleteCart"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public AddCartItemPayload getAddCartItem() {
+        return (AddCartItemPayload) get("addCartItem");
+    }
+
+    public Mutation setAddCartItem(AddCartItemPayload arg) {
+        optimisticData.put(getKey("addCartItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public UpdateCartItemPayload getUpdateCartItem() {
+        return (UpdateCartItemPayload) get("updateCartItem");
+    }
+
+    public Mutation setUpdateCartItem(UpdateCartItemPayload arg) {
+        optimisticData.put(getKey("updateCartItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public DeleteCartItemPayload getDeleteCartItem() {
+        return (DeleteCartItemPayload) get("deleteCartItem");
+    }
+
+    public Mutation setDeleteCartItem(DeleteCartItemPayload arg) {
+        optimisticData.put(getKey("deleteCartItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public AddCheckoutPayload getAddCheckout() {
+        return (AddCheckoutPayload) get("addCheckout");
+    }
+
+    public Mutation setAddCheckout(AddCheckoutPayload arg) {
+        optimisticData.put(getKey("addCheckout"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public UpdateCheckoutPayload getUpdateCheckout() {
+        return (UpdateCheckoutPayload) get("updateCheckout");
+    }
+
+    public Mutation setUpdateCheckout(UpdateCheckoutPayload arg) {
+        optimisticData.put(getKey("updateCheckout"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public DeleteCheckoutPayload getDeleteCheckout() {
+        return (DeleteCheckoutPayload) get("deleteCheckout");
+    }
+
+    public Mutation setDeleteCheckout(DeleteCheckoutPayload arg) {
+        optimisticData.put(getKey("deleteCheckout"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public AddCheckoutItemPayload getAddCheckoutItem() {
+        return (AddCheckoutItemPayload) get("addCheckoutItem");
+    }
+
+    public Mutation setAddCheckoutItem(AddCheckoutItemPayload arg) {
+        optimisticData.put(getKey("addCheckoutItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public UpdateCheckoutItemPayload getUpdateCheckoutItem() {
+        return (UpdateCheckoutItemPayload) get("updateCheckoutItem");
+    }
+
+    public Mutation setUpdateCheckoutItem(UpdateCheckoutItemPayload arg) {
+        optimisticData.put(getKey("updateCheckoutItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public DeleteCheckoutItemPayload getDeleteCheckoutItem() {
+        return (DeleteCheckoutItemPayload) get("deleteCheckoutItem");
+    }
+
+    public Mutation setDeleteCheckoutItem(DeleteCheckoutItemPayload arg) {
+        optimisticData.put(getKey("deleteCheckoutItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public AddPoderPayload getAddPoder() {
+        return (AddPoderPayload) get("addPoder");
+    }
+
+    public Mutation setAddPoder(AddPoderPayload arg) {
+        optimisticData.put(getKey("addPoder"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public UpdatePoderPayload getUpdatePoder() {
+        return (UpdatePoderPayload) get("updatePoder");
+    }
+
+    public Mutation setUpdatePoder(UpdatePoderPayload arg) {
+        optimisticData.put(getKey("updatePoder"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public DeletePoderPayload getDeletePoder() {
+        return (DeletePoderPayload) get("deletePoder");
+    }
+
+    public Mutation setDeletePoder(DeletePoderPayload arg) {
+        optimisticData.put(getKey("deletePoder"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public AddPoderItemPayload getAddPoderItem() {
+        return (AddPoderItemPayload) get("addPoderItem");
+    }
+
+    public Mutation setAddPoderItem(AddPoderItemPayload arg) {
+        optimisticData.put(getKey("addPoderItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public UpdatePoderItemPayload getUpdatePoderItem() {
+        return (UpdatePoderItemPayload) get("updatePoderItem");
+    }
+
+    public Mutation setUpdatePoderItem(UpdatePoderItemPayload arg) {
+        optimisticData.put(getKey("updatePoderItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public DeletePoderItemPayload getDeletePoderItem() {
+        return (DeletePoderItemPayload) get("deletePoderItem");
+    }
+
+    public Mutation setDeletePoderItem(DeletePoderItemPayload arg) {
+        optimisticData.put(getKey("deletePoderItem"), arg);
+        return this;
+    }
+
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "deleteNode": return true;
+
             case "updateThing": return true;
 
             case "deleteThing": return true;
@@ -1743,6 +2201,42 @@ public class Mutation extends AbstractResponse<Mutation> {
             case "updateWebhook": return true;
 
             case "deleteWebhook": return true;
+
+            case "addCart": return true;
+
+            case "updateCart": return true;
+
+            case "deleteCart": return true;
+
+            case "addCartItem": return true;
+
+            case "updateCartItem": return true;
+
+            case "deleteCartItem": return true;
+
+            case "addCheckout": return true;
+
+            case "updateCheckout": return true;
+
+            case "deleteCheckout": return true;
+
+            case "addCheckoutItem": return true;
+
+            case "updateCheckoutItem": return true;
+
+            case "deleteCheckoutItem": return true;
+
+            case "addPoder": return true;
+
+            case "updatePoder": return true;
+
+            case "deletePoder": return true;
+
+            case "addPoderItem": return true;
+
+            case "updatePoderItem": return true;
+
+            case "deletePoderItem": return true;
 
             default: return false;
         }

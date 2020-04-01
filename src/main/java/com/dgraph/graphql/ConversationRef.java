@@ -38,8 +38,6 @@ public class ConversationRef implements Serializable {
 
     private Input<String> description = Input.undefined();
 
-    private Input<ThingRef> about = Input.undefined();
-
     private Input<UserRef> accountablePerson = Input.undefined();
 
     private Input<UserRef> creator = Input.undefined();
@@ -175,27 +173,6 @@ public class ConversationRef implements Serializable {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.description = description;
-        return this;
-    }
-
-    public ThingRef getAbout() {
-        return about.getValue();
-    }
-
-    public Input<ThingRef> getAboutInput() {
-        return about;
-    }
-
-    public ConversationRef setAbout(ThingRef about) {
-        this.about = Input.optional(about);
-        return this;
-    }
-
-    public ConversationRef setAboutInput(Input<ThingRef> about) {
-        if (about == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.about = about;
         return this;
     }
 
@@ -399,17 +376,6 @@ public class ConversationRef implements Serializable {
             _queryBuilder.append("description:");
             if (description.getValue() != null) {
                 Query.appendQuotedString(_queryBuilder, description.getValue().toString());
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
-        if (this.about.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("about:");
-            if (about.getValue() != null) {
-                about.getValue().appendTo(_queryBuilder);
             } else {
                 _queryBuilder.append("null");
             }

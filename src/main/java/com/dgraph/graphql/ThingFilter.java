@@ -28,8 +28,6 @@ import java.util.Map;
 public class ThingFilter implements Serializable {
     private Input<StringHashFilter> name = Input.undefined();
 
-    private Input<List<ID>> id = Input.undefined();
-
     private Input<ThingFilter> and = Input.undefined();
 
     private Input<ThingFilter> or = Input.undefined();
@@ -54,27 +52,6 @@ public class ThingFilter implements Serializable {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.name = name;
-        return this;
-    }
-
-    public List<ID> getId() {
-        return id.getValue();
-    }
-
-    public Input<List<ID>> getIdInput() {
-        return id;
-    }
-
-    public ThingFilter setId(List<ID> id) {
-        this.id = Input.optional(id);
-        return this;
-    }
-
-    public ThingFilter setIdInput(Input<List<ID>> id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.id = id;
         return this;
     }
 
@@ -151,26 +128,6 @@ public class ThingFilter implements Serializable {
             _queryBuilder.append("name:");
             if (name.getValue() != null) {
                 name.getValue().appendTo(_queryBuilder);
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
-        if (this.id.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("id:");
-            if (id.getValue() != null) {
-                _queryBuilder.append('[');
-                {
-                    String listSeperator1 = "";
-                    for (ID item1 : id.getValue()) {
-                        _queryBuilder.append(listSeperator1);
-                        listSeperator1 = ",";
-                        Query.appendQuotedString(_queryBuilder, item1.toString());
-                    }
-                }
-                _queryBuilder.append(']');
             } else {
                 _queryBuilder.append("null");
             }

@@ -36,8 +36,8 @@ public class QueryRootQuery extends Query<QueryRootQuery> {
     /**
     * 
     */
-    public QueryRootQuery getThing(ID id, ThingQueryDefinition queryDef) {
-        startField("getThing");
+    public QueryRootQuery getNode(ID id, NodeQueryDefinition queryDef) {
+        startField("getNode");
 
         _queryBuilder.append("(id:");
         Query.appendQuotedString(_queryBuilder, id.toString());
@@ -45,7 +45,74 @@ public class QueryRootQuery extends Query<QueryRootQuery> {
         _queryBuilder.append(')');
 
         _queryBuilder.append('{');
-        queryDef.define(new ThingQuery(_queryBuilder));
+        queryDef.define(new NodeQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryNodeArguments extends Arguments {
+        QueryNodeArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryNodeArguments filter(NodeFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryNodeArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryNodeArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryNodeArgumentsDefinition {
+        void define(QueryNodeArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryNode(NodeQueryDefinition queryDef) {
+        return queryNode(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryNode(QueryNodeArgumentsDefinition argsDef, NodeQueryDefinition queryDef) {
+        startField("queryNode");
+
+        QueryNodeArguments args = new QueryNodeArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryNodeArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new NodeQuery(_queryBuilder));
         _queryBuilder.append('}');
 
         return this;
@@ -124,102 +191,6 @@ public class QueryRootQuery extends Query<QueryRootQuery> {
 
         _queryBuilder.append('{');
         queryDef.define(new ThingQuery(_queryBuilder));
-        _queryBuilder.append('}');
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public QueryRootQuery getNamespace(ID id, NamespaceQueryDefinition queryDef) {
-        startField("getNamespace");
-
-        _queryBuilder.append("(id:");
-        Query.appendQuotedString(_queryBuilder, id.toString());
-
-        _queryBuilder.append(')');
-
-        _queryBuilder.append('{');
-        queryDef.define(new NamespaceQuery(_queryBuilder));
-        _queryBuilder.append('}');
-
-        return this;
-    }
-
-    public class QueryNamespaceArguments extends Arguments {
-        QueryNamespaceArguments(StringBuilder _queryBuilder) {
-            super(_queryBuilder, true);
-        }
-
-        /**
-        * 
-        */
-        public QueryNamespaceArguments filter(NamespaceFilter value) {
-            if (value != null) {
-                startArgument("filter");
-                value.appendTo(_queryBuilder);
-            }
-            return this;
-        }
-
-        /**
-        * 
-        */
-        public QueryNamespaceArguments order(NamespaceOrder value) {
-            if (value != null) {
-                startArgument("order");
-                value.appendTo(_queryBuilder);
-            }
-            return this;
-        }
-
-        /**
-        * 
-        */
-        public QueryNamespaceArguments first(Integer value) {
-            if (value != null) {
-                startArgument("first");
-                _queryBuilder.append(value);
-            }
-            return this;
-        }
-
-        /**
-        * 
-        */
-        public QueryNamespaceArguments offset(Integer value) {
-            if (value != null) {
-                startArgument("offset");
-                _queryBuilder.append(value);
-            }
-            return this;
-        }
-    }
-
-    public interface QueryNamespaceArgumentsDefinition {
-        void define(QueryNamespaceArguments args);
-    }
-
-    /**
-    * 
-    */
-    public QueryRootQuery queryNamespace(NamespaceQueryDefinition queryDef) {
-        return queryNamespace(args -> {}, queryDef);
-    }
-
-    /**
-    * 
-    */
-    public QueryRootQuery queryNamespace(QueryNamespaceArgumentsDefinition argsDef, NamespaceQueryDefinition queryDef) {
-        startField("queryNamespace");
-
-        QueryNamespaceArguments args = new QueryNamespaceArguments(_queryBuilder);
-        argsDef.define(args);
-        QueryNamespaceArguments.end(args);
-
-        _queryBuilder.append('{');
-        queryDef.define(new NamespaceQuery(_queryBuilder));
         _queryBuilder.append('}');
 
         return this;
@@ -455,6 +426,102 @@ public class QueryRootQuery extends Query<QueryRootQuery> {
 
         _queryBuilder.append('{');
         queryDef.define(new PartyRoleQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getNamespace(ID id, NamespaceQueryDefinition queryDef) {
+        startField("getNamespace");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new NamespaceQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryNamespaceArguments extends Arguments {
+        QueryNamespaceArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryNamespaceArguments filter(NamespaceFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryNamespaceArguments order(NamespaceOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryNamespaceArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryNamespaceArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryNamespaceArgumentsDefinition {
+        void define(QueryNamespaceArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryNamespace(NamespaceQueryDefinition queryDef) {
+        return queryNamespace(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryNamespace(QueryNamespaceArgumentsDefinition argsDef, NamespaceQueryDefinition queryDef) {
+        startField("queryNamespace");
+
+        QueryNamespaceArguments args = new QueryNamespaceArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryNamespaceArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new NamespaceQuery(_queryBuilder));
         _queryBuilder.append('}');
 
         return this;
@@ -2469,6 +2536,582 @@ public class QueryRootQuery extends Query<QueryRootQuery> {
 
         _queryBuilder.append('{');
         queryDef.define(new WebhookQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getCart(ID id, CartQueryDefinition queryDef) {
+        startField("getCart");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new CartQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryCartArguments extends Arguments {
+        QueryCartArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryCartArguments filter(CartFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCartArguments order(CartOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCartArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCartArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryCartArgumentsDefinition {
+        void define(QueryCartArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCart(CartQueryDefinition queryDef) {
+        return queryCart(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCart(QueryCartArgumentsDefinition argsDef, CartQueryDefinition queryDef) {
+        startField("queryCart");
+
+        QueryCartArguments args = new QueryCartArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryCartArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new CartQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getCartItem(ID id, CartItemQueryDefinition queryDef) {
+        startField("getCartItem");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new CartItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryCartItemArguments extends Arguments {
+        QueryCartItemArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryCartItemArguments filter(CartItemFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCartItemArguments order(CartItemOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCartItemArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCartItemArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryCartItemArgumentsDefinition {
+        void define(QueryCartItemArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCartItem(CartItemQueryDefinition queryDef) {
+        return queryCartItem(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCartItem(QueryCartItemArgumentsDefinition argsDef, CartItemQueryDefinition queryDef) {
+        startField("queryCartItem");
+
+        QueryCartItemArguments args = new QueryCartItemArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryCartItemArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new CartItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getCheckout(ID id, CheckoutQueryDefinition queryDef) {
+        startField("getCheckout");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new CheckoutQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryCheckoutArguments extends Arguments {
+        QueryCheckoutArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutArguments filter(CheckoutFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutArguments order(CheckoutOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryCheckoutArgumentsDefinition {
+        void define(QueryCheckoutArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCheckout(CheckoutQueryDefinition queryDef) {
+        return queryCheckout(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCheckout(QueryCheckoutArgumentsDefinition argsDef, CheckoutQueryDefinition queryDef) {
+        startField("queryCheckout");
+
+        QueryCheckoutArguments args = new QueryCheckoutArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryCheckoutArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new CheckoutQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getCheckoutItem(ID id, CheckoutItemQueryDefinition queryDef) {
+        startField("getCheckoutItem");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new CheckoutItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryCheckoutItemArguments extends Arguments {
+        QueryCheckoutItemArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutItemArguments filter(CheckoutItemFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutItemArguments order(CheckoutItemOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutItemArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryCheckoutItemArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryCheckoutItemArgumentsDefinition {
+        void define(QueryCheckoutItemArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCheckoutItem(CheckoutItemQueryDefinition queryDef) {
+        return queryCheckoutItem(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryCheckoutItem(QueryCheckoutItemArgumentsDefinition argsDef, CheckoutItemQueryDefinition queryDef) {
+        startField("queryCheckoutItem");
+
+        QueryCheckoutItemArguments args = new QueryCheckoutItemArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryCheckoutItemArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new CheckoutItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getPoder(ID id, PoderQueryDefinition queryDef) {
+        startField("getPoder");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new PoderQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryPoderArguments extends Arguments {
+        QueryPoderArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderArguments filter(PoderFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderArguments order(PoderOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryPoderArgumentsDefinition {
+        void define(QueryPoderArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryPoder(PoderQueryDefinition queryDef) {
+        return queryPoder(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryPoder(QueryPoderArgumentsDefinition argsDef, PoderQueryDefinition queryDef) {
+        startField("queryPoder");
+
+        QueryPoderArguments args = new QueryPoderArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryPoderArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new PoderQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery getPoderItem(ID id, PoderItemQueryDefinition queryDef) {
+        startField("getPoderItem");
+
+        _queryBuilder.append("(id:");
+        Query.appendQuotedString(_queryBuilder, id.toString());
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new PoderItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    public class QueryPoderItemArguments extends Arguments {
+        QueryPoderItemArguments(StringBuilder _queryBuilder) {
+            super(_queryBuilder, true);
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderItemArguments filter(PoderItemFilter value) {
+            if (value != null) {
+                startArgument("filter");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderItemArguments order(PoderItemOrder value) {
+            if (value != null) {
+                startArgument("order");
+                value.appendTo(_queryBuilder);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderItemArguments first(Integer value) {
+            if (value != null) {
+                startArgument("first");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+
+        /**
+        * 
+        */
+        public QueryPoderItemArguments offset(Integer value) {
+            if (value != null) {
+                startArgument("offset");
+                _queryBuilder.append(value);
+            }
+            return this;
+        }
+    }
+
+    public interface QueryPoderItemArgumentsDefinition {
+        void define(QueryPoderItemArguments args);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryPoderItem(PoderItemQueryDefinition queryDef) {
+        return queryPoderItem(args -> {}, queryDef);
+    }
+
+    /**
+    * 
+    */
+    public QueryRootQuery queryPoderItem(QueryPoderItemArgumentsDefinition argsDef, PoderItemQueryDefinition queryDef) {
+        startField("queryPoderItem");
+
+        QueryPoderItemArguments args = new QueryPoderItemArguments(_queryBuilder);
+        argsDef.define(args);
+        QueryPoderItemArguments.end(args);
+
+        _queryBuilder.append('{');
+        queryDef.define(new PoderItemQuery(_queryBuilder));
         _queryBuilder.append('}');
 
         return this;

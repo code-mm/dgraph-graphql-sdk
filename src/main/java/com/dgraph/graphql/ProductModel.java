@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 产品型号
 */
-public class ProductModel extends AbstractResponse<ProductModel> implements Shoppingable, Thing {
+public class ProductModel extends AbstractResponse<ProductModel> implements Node, Shoppingable, Thing {
     public ProductModel() {
     }
 
@@ -37,6 +37,12 @@ public class ProductModel extends AbstractResponse<ProductModel> implements Shop
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -92,12 +98,6 @@ public class ProductModel extends AbstractResponse<ProductModel> implements Shop
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "isShoppingable": {
                     Boolean optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -131,8 +131,21 @@ public class ProductModel extends AbstractResponse<ProductModel> implements Shop
         }
     }
 
+    public ProductModel(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "ProductModel";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -204,19 +217,6 @@ public class ProductModel extends AbstractResponse<ProductModel> implements Shop
     * 
     */
 
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public ProductModel setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
     public Boolean getIsShoppingable() {
         return (Boolean) get("isShoppingable");
     }
@@ -241,6 +241,8 @@ public class ProductModel extends AbstractResponse<ProductModel> implements Shop
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -250,8 +252,6 @@ public class ProductModel extends AbstractResponse<ProductModel> implements Shop
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "isShoppingable": return false;
 

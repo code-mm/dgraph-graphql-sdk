@@ -12,7 +12,7 @@
 
 - 借助apollographql下载 schema.json
 
-        gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://localhost:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
+        ./gradlew :downloadApolloSchema -Pcom.apollographql.apollo.endpoint=http://192.168.0.43:8080/graphql -Pcom.apollographql.apollo.schema=src/main/graphql/schema.json
         
   
 # windows 一键部署

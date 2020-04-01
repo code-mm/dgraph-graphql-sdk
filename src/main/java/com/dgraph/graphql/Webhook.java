@@ -27,9 +27,9 @@ import java.util.Map;
 
 /**
 * 网络钩子是“用户定义的HTTP回调”。[2]网络钩子通常被某些事件激活，比如将代码推送到源[3]或评论博客。[4]当此事件发生时，原网站将向为网络钩子配置的URL发送HTTP请求。用户可配置它们引发网
-* 页上的事件以调用另一个网站的行为。Webhooks allow external services to be notified when certain events happen. 
+* 页上的事件以调用另一个网站的行为。Webhooks allow external services to be notified when certain events happen.
 */
-public class Webhook extends AbstractResponse<Webhook> implements Thing {
+public class Webhook extends AbstractResponse<Webhook> implements Node, Thing {
     public Webhook() {
     }
 
@@ -38,6 +38,12 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -89,12 +95,6 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -176,8 +176,21 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
         }
     }
 
+    public Webhook(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Webhook";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -246,19 +259,6 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Webhook setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 回调url
     */
 
@@ -312,7 +312,7 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
 
     /**
     * 【创建日期】 创作出CreativeWork的日期。 The date on which the CreativeWork was created or the item was added to a
-    * DataFeed. dateCreated	DateTime or Date or DataFeedItem or CreativeWork
+    * DataFeed. dateCreated    DateTime or Date or DataFeedItem or CreativeWork
     */
 
     public DateTime getDateCreated() {
@@ -325,7 +325,7 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
     }
 
     /**
-    * 调用此webhook的客户端 
+    * 调用此webhook的客户端
     */
 
     public SoftwareApplication getClient() {
@@ -339,6 +339,8 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -348,8 +350,6 @@ public class Webhook extends AbstractResponse<Webhook> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "payloadUrl": return false;
 

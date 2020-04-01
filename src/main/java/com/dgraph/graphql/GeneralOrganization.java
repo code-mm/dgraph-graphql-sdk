@@ -30,7 +30,7 @@ import java.util.Map;
 * 也用于临时几个人组成的聊天小组，房间
 * http://cnschema.org/Organization
 */
-public class GeneralOrganization extends AbstractResponse<GeneralOrganization> implements Organization, Party, Thing {
+public class GeneralOrganization extends AbstractResponse<GeneralOrganization> implements Node, Organization, Party, Thing {
     public GeneralOrganization() {
     }
 
@@ -160,6 +160,12 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
                     break;
                 }
 
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -215,12 +221,6 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "availableConversations": {
                     List<Conversation> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -262,6 +262,11 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
                 }
             }
         }
+    }
+
+    public GeneralOrganization(ID id) {
+        this();
+        optimisticData.put("id", id);
     }
 
     public String getGraphQlTypeName() {
@@ -350,6 +355,14 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
     * 
     */
 
+    public ID getId() {
+        return (ID) get("id");
+    }
+
+    /**
+    * 
+    */
+
     public List<Namespace> getNamespaces() {
         return (List<Namespace>) get("namespaces");
     }
@@ -412,19 +425,6 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public GeneralOrganization setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 可以访问的会话
     */
 
@@ -464,6 +464,8 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
 
             case "hasPartyRoleName": return true;
 
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -473,8 +475,6 @@ public class GeneralOrganization extends AbstractResponse<GeneralOrganization> i
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "availableConversations": return true;
 

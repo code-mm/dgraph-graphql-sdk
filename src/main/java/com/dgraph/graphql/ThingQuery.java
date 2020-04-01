@@ -150,13 +150,31 @@ public class ThingQuery extends Query<ThingQuery> {
         return this;
     }
 
-    /**
-    * The id of the thing.
-    * The id: ID! in Thing means that an auto-generated ID by Dgraph will be used to identify things.
-    */
-    public ThingQuery id() {
-        startField("id");
+    public ThingQuery onCart(CartQueryDefinition queryDef) {
+        startInlineFragment("Cart");
+        queryDef.define(new CartQuery(_queryBuilder));
+        _queryBuilder.append('}');
+        return this;
+    }
 
+    public ThingQuery onCartItem(CartItemQueryDefinition queryDef) {
+        startInlineFragment("CartItem");
+        queryDef.define(new CartItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
+        return this;
+    }
+
+    public ThingQuery onCheckout(CheckoutQueryDefinition queryDef) {
+        startInlineFragment("Checkout");
+        queryDef.define(new CheckoutQuery(_queryBuilder));
+        _queryBuilder.append('}');
+        return this;
+    }
+
+    public ThingQuery onCheckoutItem(CheckoutItemQueryDefinition queryDef) {
+        startInlineFragment("CheckoutItem");
+        queryDef.define(new CheckoutItemQuery(_queryBuilder));
+        _queryBuilder.append('}');
         return this;
     }
 
@@ -247,6 +265,20 @@ public class ThingQuery extends Query<ThingQuery> {
     public ThingQuery onPerson(PersonQueryDefinition queryDef) {
         startInlineFragment("Person");
         queryDef.define(new PersonQuery(_queryBuilder));
+        _queryBuilder.append('}');
+        return this;
+    }
+
+    public ThingQuery onPoder(PoderQueryDefinition queryDef) {
+        startInlineFragment("Poder");
+        queryDef.define(new PoderQuery(_queryBuilder));
+        _queryBuilder.append('}');
+        return this;
+    }
+
+    public ThingQuery onPoderItem(PoderItemQueryDefinition queryDef) {
+        startInlineFragment("PoderItem");
+        queryDef.define(new PoderItemQuery(_queryBuilder));
         _queryBuilder.append('}');
         return this;
     }

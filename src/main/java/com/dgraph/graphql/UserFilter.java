@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 public class UserFilter implements Serializable {
-    private Input<StringHashFilter> name = Input.undefined();
-
     private Input<List<ID>> id = Input.undefined();
+
+    private Input<StringHashFilter> name = Input.undefined();
 
     private Input<StringHashFilter> username = Input.undefined();
 
@@ -37,27 +37,6 @@ public class UserFilter implements Serializable {
     private Input<UserFilter> or = Input.undefined();
 
     private Input<UserFilter> not = Input.undefined();
-
-    public StringHashFilter getName() {
-        return name.getValue();
-    }
-
-    public Input<StringHashFilter> getNameInput() {
-        return name;
-    }
-
-    public UserFilter setName(StringHashFilter name) {
-        this.name = Input.optional(name);
-        return this;
-    }
-
-    public UserFilter setNameInput(Input<StringHashFilter> name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.name = name;
-        return this;
-    }
 
     public List<ID> getId() {
         return id.getValue();
@@ -77,6 +56,27 @@ public class UserFilter implements Serializable {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.id = id;
+        return this;
+    }
+
+    public StringHashFilter getName() {
+        return name.getValue();
+    }
+
+    public Input<StringHashFilter> getNameInput() {
+        return name;
+    }
+
+    public UserFilter setName(StringHashFilter name) {
+        this.name = Input.optional(name);
+        return this;
+    }
+
+    public UserFilter setNameInput(Input<StringHashFilter> name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Input can not be null");
+        }
+        this.name = name;
         return this;
     }
 
@@ -168,17 +168,6 @@ public class UserFilter implements Serializable {
         String separator = "";
         _queryBuilder.append('{');
 
-        if (this.name.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("name:");
-            if (name.getValue() != null) {
-                name.getValue().appendTo(_queryBuilder);
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
         if (this.id.isDefined()) {
             _queryBuilder.append(separator);
             separator = ",";
@@ -194,6 +183,17 @@ public class UserFilter implements Serializable {
                     }
                 }
                 _queryBuilder.append(']');
+            } else {
+                _queryBuilder.append("null");
+            }
+        }
+
+        if (this.name.isDefined()) {
+            _queryBuilder.append(separator);
+            separator = ",";
+            _queryBuilder.append("name:");
+            if (name.getValue() != null) {
+                name.getValue().appendTo(_queryBuilder);
             } else {
                 _queryBuilder.append("null");
             }

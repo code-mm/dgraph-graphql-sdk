@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * [【社交关注角色】FollowerRole)
 */
-public class FollowerRole extends AbstractResponse<FollowerRole> implements PartyRole, Thing {
+public class FollowerRole extends AbstractResponse<FollowerRole> implements Node, PartyRole, Thing {
     public FollowerRole() {
     }
 
@@ -77,6 +77,12 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
                     }
 
                     responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -136,12 +142,6 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "settings": {
                     String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -162,6 +162,11 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
                 }
             }
         }
+    }
+
+    public FollowerRole(ID id) {
+        this();
+        optimisticData.put("id", id);
     }
 
     public String getGraphQlTypeName() {
@@ -218,6 +223,14 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
     public FollowerRole setDateThrough(DateTime arg) {
         optimisticData.put(getKey("dateThrough"), arg);
         return this;
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -286,19 +299,6 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public FollowerRole setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 关注设置,如关注最新产品信息
     */
 
@@ -321,6 +321,8 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
 
             case "dateThrough": return false;
 
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -330,8 +332,6 @@ public class FollowerRole extends AbstractResponse<FollowerRole> implements Part
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "settings": return false;
 

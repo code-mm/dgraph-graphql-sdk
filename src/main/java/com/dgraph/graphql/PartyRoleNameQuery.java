@@ -31,6 +31,8 @@ import java.util.Map;
 public class PartyRoleNameQuery extends Query<PartyRoleNameQuery> {
     PartyRoleNameQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -143,15 +145,6 @@ public class PartyRoleNameQuery extends Query<PartyRoleNameQuery> {
     */
     public PartyRoleNameQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public PartyRoleNameQuery id() {
-        startField("id");
 
         return this;
     }

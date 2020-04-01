@@ -36,8 +36,6 @@ public class AddReviewInput implements Serializable {
 
     private Input<String> description = Input.undefined();
 
-    private Input<ThingRef> itemReviewed = Input.undefined();
-
     private Input<String> reviewAspect = Input.undefined();
 
     private Input<String> reviewBody = Input.undefined();
@@ -142,27 +140,6 @@ public class AddReviewInput implements Serializable {
             throw new IllegalArgumentException("Input can not be null");
         }
         this.description = description;
-        return this;
-    }
-
-    public ThingRef getItemReviewed() {
-        return itemReviewed.getValue();
-    }
-
-    public Input<ThingRef> getItemReviewedInput() {
-        return itemReviewed;
-    }
-
-    public AddReviewInput setItemReviewed(ThingRef itemReviewed) {
-        this.itemReviewed = Input.optional(itemReviewed);
-        return this;
-    }
-
-    public AddReviewInput setItemReviewedInput(Input<ThingRef> itemReviewed) {
-        if (itemReviewed == null) {
-            throw new IllegalArgumentException("Input can not be null");
-        }
-        this.itemReviewed = itemReviewed;
         return this;
     }
 
@@ -328,17 +305,6 @@ public class AddReviewInput implements Serializable {
             _queryBuilder.append("description:");
             if (description.getValue() != null) {
                 Query.appendQuotedString(_queryBuilder, description.getValue().toString());
-            } else {
-                _queryBuilder.append("null");
-            }
-        }
-
-        if (this.itemReviewed.isDefined()) {
-            _queryBuilder.append(separator);
-            separator = ",";
-            _queryBuilder.append("itemReviewed:");
-            if (itemReviewed.getValue() != null) {
-                itemReviewed.getValue().appendTo(_queryBuilder);
             } else {
                 _queryBuilder.append("null");
             }

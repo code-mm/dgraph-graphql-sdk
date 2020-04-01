@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 用户账号
 */
-public class User extends AbstractResponse<User> implements Thing {
+public class User extends AbstractResponse<User> implements Node, Thing {
     public User() {
     }
 
@@ -37,6 +37,12 @@ public class User extends AbstractResponse<User> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -92,12 +98,6 @@ public class User extends AbstractResponse<User> implements Thing {
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "username": {
                     responseData.put(key, jsonAsString(field.getValue(), key));
 
@@ -143,8 +143,21 @@ public class User extends AbstractResponse<User> implements Thing {
         }
     }
 
+    public User(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "User";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -213,19 +226,6 @@ public class User extends AbstractResponse<User> implements Thing {
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public User setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * The username used to login.
     * We also want to make sure that usernames are unique. The @id directive takes care of that - it also
     * automatically adds hash searching, so we can drop the @search(by: [hash]), though having it also
@@ -282,6 +282,8 @@ public class User extends AbstractResponse<User> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -291,8 +293,6 @@ public class User extends AbstractResponse<User> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "username": return false;
 

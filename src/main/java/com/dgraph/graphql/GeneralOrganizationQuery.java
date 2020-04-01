@@ -33,6 +33,8 @@ import java.util.Map;
 public class GeneralOrganizationQuery extends Query<GeneralOrganizationQuery> {
     GeneralOrganizationQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class OwnsArguments extends Arguments {
@@ -547,15 +549,6 @@ public class GeneralOrganizationQuery extends Query<GeneralOrganizationQuery> {
     */
     public GeneralOrganizationQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public GeneralOrganizationQuery id() {
-        startField("id");
 
         return this;
     }

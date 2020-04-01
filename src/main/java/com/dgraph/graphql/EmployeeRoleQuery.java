@@ -31,6 +31,8 @@ import java.util.Map;
 public class EmployeeRoleQuery extends Query<EmployeeRoleQuery> {
     EmployeeRoleQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class PersonArguments extends Arguments {
@@ -251,15 +253,6 @@ public class EmployeeRoleQuery extends Query<EmployeeRoleQuery> {
     */
     public EmployeeRoleQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public EmployeeRoleQuery id() {
-        startField("id");
 
         return this;
     }

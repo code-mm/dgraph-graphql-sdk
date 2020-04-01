@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 【消息】由发送者发给一个或多个组织或个人的信息 A single message from a sender to one or more organizations or people.
 */
-public class Message extends AbstractResponse<Message> implements Readable, Thing {
+public class Message extends AbstractResponse<Message> implements Node, Readable, Thing {
     public Message() {
     }
 
@@ -54,6 +54,12 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
                     }
 
                     responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -109,12 +115,6 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -243,6 +243,11 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
         }
     }
 
+    public Message(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Message";
     }
@@ -258,6 +263,14 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
     public Message setHasReadNotes(List<ReadNote> arg) {
         optimisticData.put(getKey("hasReadNotes"), arg);
         return this;
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -322,19 +335,6 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
 
     public Message setDescription(String arg) {
         optimisticData.put(getKey("description"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Message setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
         return this;
     }
 
@@ -435,7 +435,7 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
     }
 
     /**
-    * 【评论】 评论，一般是用户对CreativeWork的评论。 
+    * 【评论】 评论，一般是用户对CreativeWork的评论。
     */
 
     public List<Review> getHasReviews() {
@@ -451,6 +451,8 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
         switch (getFieldName(key)) {
             case "hasReadNotes": return true;
 
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -460,8 +462,6 @@ public class Message extends AbstractResponse<Message> implements Readable, Thin
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "isMessageOf": return true;
 

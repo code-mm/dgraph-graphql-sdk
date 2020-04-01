@@ -29,7 +29,7 @@ import java.util.Map;
 * 资源对象所属的namespace,根据一定规则由平台生成或配置定义如：io.shurui.store001.order, 默认值是default
 * 如果某个角色拥有inamespace：'io.shurui'的权限，则拥有'io.shurui'一下所有子namespace的相应权限
 */
-public class Namespace extends AbstractResponse<Namespace> implements Thing {
+public class Namespace extends AbstractResponse<Namespace> implements Node, Thing {
     public Namespace() {
     }
 
@@ -38,6 +38,12 @@ public class Namespace extends AbstractResponse<Namespace> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -93,12 +99,6 @@ public class Namespace extends AbstractResponse<Namespace> implements Thing {
                     break;
                 }
 
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
-
-                    break;
-                }
-
                 case "namespace": {
                     String optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -132,8 +132,21 @@ public class Namespace extends AbstractResponse<Namespace> implements Thing {
         }
     }
 
+    public Namespace(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Namespace";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -202,19 +215,6 @@ public class Namespace extends AbstractResponse<Namespace> implements Thing {
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Namespace setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 资源对象所属的namespace,根据一定规则由平台生成或配置定义如：io.shurui.store001.order, 默认值是default
     * 如果某个角色拥有inamespace：'io.shurui'的权限，则拥有'io.shurui'一下所有子namespace的相应权限
     */
@@ -243,6 +243,8 @@ public class Namespace extends AbstractResponse<Namespace> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -252,8 +254,6 @@ public class Namespace extends AbstractResponse<Namespace> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "namespace": return false;
 

@@ -31,6 +31,8 @@ import java.util.Map;
 public class EntryPointQuery extends Query<EntryPointQuery> {
     EntryPointQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -143,15 +145,6 @@ public class EntryPointQuery extends Query<EntryPointQuery> {
     */
     public EntryPointQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public EntryPointQuery id() {
-        startField("id");
 
         return this;
     }

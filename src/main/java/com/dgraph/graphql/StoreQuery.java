@@ -31,6 +31,8 @@ import java.util.Map;
 public class StoreQuery extends Query<StoreQuery> {
     StoreQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class OwnsArguments extends Arguments {
@@ -549,15 +551,6 @@ public class StoreQuery extends Query<StoreQuery> {
         return this;
     }
 
-    /**
-    * 
-    */
-    public StoreQuery id() {
-        startField("id");
-
-        return this;
-    }
-
     public class EmployeesArguments extends Arguments {
         EmployeesArguments(StringBuilder _queryBuilder) {
             super(_queryBuilder, true);
@@ -691,14 +684,14 @@ public class StoreQuery extends Query<StoreQuery> {
     }
 
     /**
-    * 【关注组织的人】 社交网络上本组织被别人关注 
+    * 【关注组织的人】 社交网络上本组织被别人关注
     */
     public StoreQuery followers(FollowerRoleQueryDefinition queryDef) {
         return followers(args -> {}, queryDef);
     }
 
     /**
-    * 【关注组织的人】 社交网络上本组织被别人关注 
+    * 【关注组织的人】 社交网络上本组织被别人关注
     */
     public StoreQuery followers(FollowersArgumentsDefinition argsDef, FollowerRoleQueryDefinition queryDef) {
         startField("followers");

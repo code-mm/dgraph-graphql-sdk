@@ -31,6 +31,8 @@ import java.util.Map;
 public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     SoftwareApplicationQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -148,16 +150,7 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * 
-    */
-    public SoftwareApplicationQuery id() {
-        startField("id");
-
-        return this;
-    }
-
-    /**
-    * applicationSuite	Text 	The name of the application suite to which the application belongs (e.g.
+    * applicationSuite    Text    The name of the application suite to which the application belongs (e.g.
     * Excel belongs to Office).
     */
     public SoftwareApplicationQuery applicationSuite() {
@@ -167,13 +160,13 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * availableOnDevice	Text 	Device required to run the application. Used in cases where a specific
+    * availableOnDevice    Text    Device required to run the application. Used in cases where a specific
     * make/model is required to run the application. Supersedes device.
-    * countriesNotSupported	Text 	Countries for which the application is not supported. You can also
+    * countriesNotSupported    Text    Countries for which the application is not supported. You can also
     * provide the two-letter ISO 3166-1 alpha-2 country code.
-    * countriesSupported	Text 	Countries for which the application is supported. You can also provide the
-    * two-letter ISO 3166-1 alpha-2 country code.
-    * downloadUrl	URL 	If the file can be downloaded, URL to download the binary.
+    * countriesSupported    Text    Countries for which the application is supported. You can also provide
+    * the two-letter ISO 3166-1 alpha-2 country code.
+    * downloadUrl    URL    If the file can be downloaded, URL to download the binary.
     */
     public SoftwareApplicationQuery downloadUrl() {
         startField("downloadUrl");
@@ -182,8 +175,8 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * featureList	Text  or URL 	Features or modules provided by this application (and possibly required by
-    * other applications).
+    * featureList    Text  or URL    Features or modules provided by this application (and possibly
+    * required by other applications).
     */
     public SoftwareApplicationQuery featureList() {
         startField("featureList");
@@ -192,9 +185,9 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * fileSize	Text 	Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB
+    * fileSize    Text    Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB
     * etc.), KB will be assumed.
-    * installUrl	URL 	URL at which the app may be installed, if different from the URL of the item.
+    * installUrl    URL    URL at which the app may be installed, if different from the URL of the item.
     */
     public SoftwareApplicationQuery installUrl() {
         startField("installUrl");
@@ -203,12 +196,12 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * memoryRequirements	Text  or URL 	Minimum memory requirements.
-    * operatingSystem	Text 	Operating systems supported (Windows 7, OSX 10.6, Android 1.6).
-    * permissions	Text 	Permission(s) required to run the app (for example, a mobile app may require full
-    * internet access or may run only on wifi).
-    * processorRequirements	Text 	Processor architecture required to run the application (e.g. IA64).
-    * releaseNotes	Text  or URL 	Description of what changed in this version.
+    * memoryRequirements    Text  or URL    Minimum memory requirements.
+    * operatingSystem    Text    Operating systems supported (Windows 7, OSX 10.6, Android 1.6).
+    * permissions    Text    Permission(s) required to run the app (for example, a mobile app may require
+    * full internet access or may run only on wifi).
+    * processorRequirements    Text    Processor architecture required to run the application (e.g. IA64).
+    * releaseNotes    Text  or URL    Description of what changed in this version.
     */
     public SoftwareApplicationQuery releaseNotes() {
         startField("releaseNotes");
@@ -217,7 +210,7 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * screenshot	ImageObject  or URL 	A link to a screenshot image of the app.
+    * screenshot    ImageObject  or URL    A link to a screenshot image of the app.
     */
     public SoftwareApplicationQuery screenshot() {
         startField("screenshot");
@@ -226,15 +219,15 @@ public class SoftwareApplicationQuery extends Query<SoftwareApplicationQuery> {
     }
 
     /**
-    * softwareAddOn	SoftwareApplication 	Additional content for a software application.
-    * softwareHelp	CreativeWork 	Software application help.
-    * softwareRequirements	Text  or URL 	Component dependency requirements for application. This includes
-    * runtime environments and shared libraries that are not included in the application distribution
-    * package, but required to run the application (Examples: DirectX, Java or .NET runtime). Supersedes
-    * requirements.
-    * softwareVersion	Text 	Version of the software instance.
-    * storageRequirements	Text  or URL 	Storage requirements (free space required).
-    * supportingData	DataFeed 	Supporting data for a SoftwareApplication.
+    * softwareAddOn    SoftwareApplication    Additional content for a software application.
+    * softwareHelp    CreativeWork    Software application help.
+    * softwareRequirements    Text  or URL    Component dependency requirements for application. This
+    * includes runtime environments and shared libraries that are not included in the application
+    * distribution package, but required to run the application (Examples: DirectX, Java or .NET runtime).
+    * Supersedes requirements.
+    * softwareVersion    Text    Version of the software instance.
+    * storageRequirements    Text  or URL    Storage requirements (free space required).
+    * supportingData    DataFeed    Supporting data for a SoftwareApplication.
     */
     public SoftwareApplicationQuery softwareVersion() {
         startField("softwareVersion");

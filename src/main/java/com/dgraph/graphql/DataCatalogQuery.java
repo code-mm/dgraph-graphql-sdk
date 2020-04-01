@@ -32,6 +32,8 @@ import java.util.Map;
 public class DataCatalogQuery extends Query<DataCatalogQuery> {
     DataCatalogQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -144,15 +146,6 @@ public class DataCatalogQuery extends Query<DataCatalogQuery> {
     */
     public DataCatalogQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public DataCatalogQuery id() {
-        startField("id");
 
         return this;
     }

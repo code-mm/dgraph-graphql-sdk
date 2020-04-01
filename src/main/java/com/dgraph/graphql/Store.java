@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 零售店铺
 */
-public class Store extends AbstractResponse<Store> implements Organization, Party, Thing {
+public class Store extends AbstractResponse<Store> implements Node, Organization, Party, Thing {
     public Store() {
     }
 
@@ -158,6 +158,12 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
                     break;
                 }
 
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -209,12 +215,6 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -326,6 +326,11 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
         }
     }
 
+    public Store(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Store";
     }
@@ -412,6 +417,14 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
     * 
     */
 
+    public ID getId() {
+        return (ID) get("id");
+    }
+
+    /**
+    * 
+    */
+
     public List<Namespace> getNamespaces() {
         return (List<Namespace>) get("namespaces");
     }
@@ -474,19 +487,6 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Store setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 【雇员】 组织的雇员.在组织承担角色的个人有时间限制
     */
 
@@ -500,7 +500,7 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
     }
 
     /**
-    * 【关注组织的人】 社交网络上本组织被别人关注 
+    * 【关注组织的人】 社交网络上本组织被别人关注
     */
 
     public List<FollowerRole> getFollowers() {
@@ -578,6 +578,8 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
 
             case "hasPartyRoleName": return true;
 
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -587,8 +589,6 @@ public class Store extends AbstractResponse<Store> implements Organization, Part
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "employees": return true;
 

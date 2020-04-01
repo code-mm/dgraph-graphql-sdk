@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 个人,可能在平台里有一个且唯一的用户账号User
 */
-public class Person extends AbstractResponse<Person> implements Party, Thing {
+public class Person extends AbstractResponse<Person> implements Node, Party, Thing {
     public Person() {
     }
 
@@ -37,6 +37,12 @@ public class Person extends AbstractResponse<Person> implements Party, Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -88,12 +94,6 @@ public class Person extends AbstractResponse<Person> implements Party, Thing {
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -185,8 +185,21 @@ public class Person extends AbstractResponse<Person> implements Party, Thing {
         }
     }
 
+    public Person(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "Person";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -251,19 +264,6 @@ public class Person extends AbstractResponse<Person> implements Party, Thing {
 
     public Person setDescription(String arg) {
         optimisticData.put(getKey("description"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public Person setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
         return this;
     }
 
@@ -349,6 +349,8 @@ public class Person extends AbstractResponse<Person> implements Party, Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -358,8 +360,6 @@ public class Person extends AbstractResponse<Person> implements Party, Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "owns": return true;
 

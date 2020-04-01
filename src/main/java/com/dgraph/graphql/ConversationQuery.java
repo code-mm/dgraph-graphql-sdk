@@ -33,6 +33,8 @@ import java.util.Map;
 public class ConversationQuery extends Query<ConversationQuery> {
     ConversationQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -145,15 +147,6 @@ public class ConversationQuery extends Query<ConversationQuery> {
     */
     public ConversationQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public ConversationQuery id() {
-        startField("id");
 
         return this;
     }
@@ -405,14 +398,14 @@ public class ConversationQuery extends Query<ConversationQuery> {
     }
 
     /**
-    * 参照 hasPart【作品组件】 表示某个作品是该作品的一部分 
+    * 参照 hasPart【作品组件】 表示某个作品是该作品的一部分
     */
     public ConversationQuery hasMessages(MessageQueryDefinition queryDef) {
         return hasMessages(args -> {}, queryDef);
     }
 
     /**
-    * 参照 hasPart【作品组件】 表示某个作品是该作品的一部分 
+    * 参照 hasPart【作品组件】 表示某个作品是该作品的一部分
     */
     public ConversationQuery hasMessages(HasMessagesArgumentsDefinition argsDef, MessageQueryDefinition queryDef) {
         startField("hasMessages");

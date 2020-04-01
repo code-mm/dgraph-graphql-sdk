@@ -31,6 +31,8 @@ import java.util.Map;
 public class OwnershipQuery extends Query<OwnershipQuery> {
     OwnershipQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -143,15 +145,6 @@ public class OwnershipQuery extends Query<OwnershipQuery> {
     */
     public OwnershipQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public OwnershipQuery id() {
-        startField("id");
 
         return this;
     }

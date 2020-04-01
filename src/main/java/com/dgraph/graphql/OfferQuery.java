@@ -31,6 +31,8 @@ import java.util.Map;
 public class OfferQuery extends Query<OfferQuery> {
     OfferQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -143,15 +145,6 @@ public class OfferQuery extends Query<OfferQuery> {
     */
     public OfferQuery description() {
         startField("description");
-
-        return this;
-    }
-
-    /**
-    * 
-    */
-    public OfferQuery id() {
-        startField("id");
 
         return this;
     }

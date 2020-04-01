@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 【阅读收条】 记录每个人阅读本条消息的时间
 */
-public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
+public class ReadNote extends AbstractResponse<ReadNote> implements Node, Thing {
     public ReadNote() {
     }
 
@@ -37,6 +37,12 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -88,12 +94,6 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -152,8 +152,21 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
         }
     }
 
+    public ReadNote(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "ReadNote";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -222,19 +235,6 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public ReadNote setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 【阅读内容】 逆属性: Message.hasReadNotes
     */
 
@@ -261,7 +261,7 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
     }
 
     /**
-    * 【阅读日期】 
+    * 【阅读日期】
     */
 
     public DateTime getDateRead() {
@@ -275,6 +275,8 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -284,8 +286,6 @@ public class ReadNote extends AbstractResponse<ReadNote> implements Thing {
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "isReadNoteOf": return false;
 

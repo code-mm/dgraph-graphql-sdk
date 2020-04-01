@@ -31,6 +31,8 @@ import java.util.Map;
 public class ReadNoteQuery extends Query<ReadNoteQuery> {
     ReadNoteQuery(StringBuilder _queryBuilder) {
         super(_queryBuilder);
+
+        startField("id");
     }
 
     public class NamespacesArguments extends Arguments {
@@ -147,15 +149,6 @@ public class ReadNoteQuery extends Query<ReadNoteQuery> {
         return this;
     }
 
-    /**
-    * 
-    */
-    public ReadNoteQuery id() {
-        startField("id");
-
-        return this;
-    }
-
     public class IsReadNoteOfArguments extends Arguments {
         IsReadNoteOfArguments(StringBuilder _queryBuilder) {
             super(_queryBuilder, true);
@@ -258,7 +251,7 @@ public class ReadNoteQuery extends Query<ReadNoteQuery> {
     }
 
     /**
-    * 【阅读日期】 
+    * 【阅读日期】
     */
     public ReadNoteQuery dateRead() {
         startField("dateRead");

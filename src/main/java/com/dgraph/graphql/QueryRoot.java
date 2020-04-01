@@ -37,10 +37,31 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
-                case "getThing": {
-                    Thing optional1 = null;
+                case "getNode": {
+                    Node optional1 = null;
                     if (!field.getValue().isJsonNull()) {
-                        optional1 = UnknownThing.create(jsonAsObject(field.getValue(), key));
+                        optional1 = UnknownNode.create(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryNode": {
+                    List<Node> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<Node> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            Node optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = UnknownNode.create(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
                     }
 
                     responseData.put(key, optional1);
@@ -56,38 +77,6 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
                             Thing optional2 = null;
                             if (!element1.isJsonNull()) {
                                 optional2 = UnknownThing.create(jsonAsObject(element1, key));
-                            }
-
-                            list1.add(optional2);
-                        }
-
-                        optional1 = list1;
-                    }
-
-                    responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "getNamespace": {
-                    Namespace optional1 = null;
-                    if (!field.getValue().isJsonNull()) {
-                        optional1 = new Namespace(jsonAsObject(field.getValue(), key));
-                    }
-
-                    responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "queryNamespace": {
-                    List<Namespace> optional1 = null;
-                    if (!field.getValue().isJsonNull()) {
-                        List<Namespace> list1 = new ArrayList<>();
-                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
-                            Namespace optional2 = null;
-                            if (!element1.isJsonNull()) {
-                                optional2 = new Namespace(jsonAsObject(element1, key));
                             }
 
                             list1.add(optional2);
@@ -172,6 +161,38 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
                             PartyRole optional2 = null;
                             if (!element1.isJsonNull()) {
                                 optional2 = UnknownPartyRole.create(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "getNamespace": {
+                    Namespace optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new Namespace(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryNamespace": {
+                    List<Namespace> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<Namespace> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            Namespace optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new Namespace(jsonAsObject(element1, key));
                             }
 
                             list1.add(optional2);
@@ -846,6 +867,198 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
                     break;
                 }
 
+                case "getCart": {
+                    Cart optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new Cart(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryCart": {
+                    List<Cart> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<Cart> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            Cart optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new Cart(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "getCartItem": {
+                    CartItem optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new CartItem(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryCartItem": {
+                    List<CartItem> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<CartItem> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            CartItem optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new CartItem(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "getCheckout": {
+                    Checkout optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new Checkout(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryCheckout": {
+                    List<Checkout> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<Checkout> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            Checkout optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new Checkout(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "getCheckoutItem": {
+                    CheckoutItem optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new CheckoutItem(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryCheckoutItem": {
+                    List<CheckoutItem> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<CheckoutItem> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            CheckoutItem optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new CheckoutItem(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "getPoder": {
+                    Poder optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new Poder(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryPoder": {
+                    List<Poder> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<Poder> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            Poder optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new Poder(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "getPoderItem": {
+                    PoderItem optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        optional1 = new PoderItem(jsonAsObject(field.getValue(), key));
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
+                case "queryPoderItem": {
+                    List<PoderItem> optional1 = null;
+                    if (!field.getValue().isJsonNull()) {
+                        List<PoderItem> list1 = new ArrayList<>();
+                        for (JsonElement element1 : jsonAsArray(field.getValue(), key)) {
+                            PoderItem optional2 = null;
+                            if (!element1.isJsonNull()) {
+                                optional2 = new PoderItem(jsonAsObject(element1, key));
+                            }
+
+                            list1.add(optional2);
+                        }
+
+                        optional1 = list1;
+                    }
+
+                    responseData.put(key, optional1);
+
+                    break;
+                }
+
                 case "__typename": {
                     responseData.put(key, jsonAsString(field.getValue(), key));
                     break;
@@ -865,12 +1078,25 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
     * 
     */
 
-    public Thing getGetThing() {
-        return (Thing) get("getThing");
+    public Node getGetNode() {
+        return (Node) get("getNode");
     }
 
-    public QueryRoot setGetThing(Thing arg) {
-        optimisticData.put(getKey("getThing"), arg);
+    public QueryRoot setGetNode(Node arg) {
+        optimisticData.put(getKey("getNode"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<Node> getQueryNode() {
+        return (List<Node>) get("queryNode");
+    }
+
+    public QueryRoot setQueryNode(List<Node> arg) {
+        optimisticData.put(getKey("queryNode"), arg);
         return this;
     }
 
@@ -884,32 +1110,6 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
 
     public QueryRoot setQueryThing(List<Thing> arg) {
         optimisticData.put(getKey("queryThing"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
-    public Namespace getGetNamespace() {
-        return (Namespace) get("getNamespace");
-    }
-
-    public QueryRoot setGetNamespace(Namespace arg) {
-        optimisticData.put(getKey("getNamespace"), arg);
-        return this;
-    }
-
-    /**
-    * 
-    */
-
-    public List<Namespace> getQueryNamespace() {
-        return (List<Namespace>) get("queryNamespace");
-    }
-
-    public QueryRoot setQueryNamespace(List<Namespace> arg) {
-        optimisticData.put(getKey("queryNamespace"), arg);
         return this;
     }
 
@@ -962,6 +1162,32 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
 
     public QueryRoot setQueryPartyRole(List<PartyRole> arg) {
         optimisticData.put(getKey("queryPartyRole"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public Namespace getGetNamespace() {
+        return (Namespace) get("getNamespace");
+    }
+
+    public QueryRoot setGetNamespace(Namespace arg) {
+        optimisticData.put(getKey("getNamespace"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<Namespace> getQueryNamespace() {
+        return (List<Namespace>) get("queryNamespace");
+    }
+
+    public QueryRoot setQueryNamespace(List<Namespace> arg) {
+        optimisticData.put(getKey("queryNamespace"), arg);
         return this;
     }
 
@@ -1498,15 +1724,169 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
         return this;
     }
 
+    /**
+    * 
+    */
+
+    public Cart getGetCart() {
+        return (Cart) get("getCart");
+    }
+
+    public QueryRoot setGetCart(Cart arg) {
+        optimisticData.put(getKey("getCart"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<Cart> getQueryCart() {
+        return (List<Cart>) get("queryCart");
+    }
+
+    public QueryRoot setQueryCart(List<Cart> arg) {
+        optimisticData.put(getKey("queryCart"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public CartItem getGetCartItem() {
+        return (CartItem) get("getCartItem");
+    }
+
+    public QueryRoot setGetCartItem(CartItem arg) {
+        optimisticData.put(getKey("getCartItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<CartItem> getQueryCartItem() {
+        return (List<CartItem>) get("queryCartItem");
+    }
+
+    public QueryRoot setQueryCartItem(List<CartItem> arg) {
+        optimisticData.put(getKey("queryCartItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public Checkout getGetCheckout() {
+        return (Checkout) get("getCheckout");
+    }
+
+    public QueryRoot setGetCheckout(Checkout arg) {
+        optimisticData.put(getKey("getCheckout"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<Checkout> getQueryCheckout() {
+        return (List<Checkout>) get("queryCheckout");
+    }
+
+    public QueryRoot setQueryCheckout(List<Checkout> arg) {
+        optimisticData.put(getKey("queryCheckout"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public CheckoutItem getGetCheckoutItem() {
+        return (CheckoutItem) get("getCheckoutItem");
+    }
+
+    public QueryRoot setGetCheckoutItem(CheckoutItem arg) {
+        optimisticData.put(getKey("getCheckoutItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<CheckoutItem> getQueryCheckoutItem() {
+        return (List<CheckoutItem>) get("queryCheckoutItem");
+    }
+
+    public QueryRoot setQueryCheckoutItem(List<CheckoutItem> arg) {
+        optimisticData.put(getKey("queryCheckoutItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public Poder getGetPoder() {
+        return (Poder) get("getPoder");
+    }
+
+    public QueryRoot setGetPoder(Poder arg) {
+        optimisticData.put(getKey("getPoder"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<Poder> getQueryPoder() {
+        return (List<Poder>) get("queryPoder");
+    }
+
+    public QueryRoot setQueryPoder(List<Poder> arg) {
+        optimisticData.put(getKey("queryPoder"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public PoderItem getGetPoderItem() {
+        return (PoderItem) get("getPoderItem");
+    }
+
+    public QueryRoot setGetPoderItem(PoderItem arg) {
+        optimisticData.put(getKey("getPoderItem"), arg);
+        return this;
+    }
+
+    /**
+    * 
+    */
+
+    public List<PoderItem> getQueryPoderItem() {
+        return (List<PoderItem>) get("queryPoderItem");
+    }
+
+    public QueryRoot setQueryPoderItem(List<PoderItem> arg) {
+        optimisticData.put(getKey("queryPoderItem"), arg);
+        return this;
+    }
+
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
-            case "getThing": return false;
+            case "getNode": return false;
+
+            case "queryNode": return false;
 
             case "queryThing": return false;
-
-            case "getNamespace": return true;
-
-            case "queryNamespace": return true;
 
             case "queryShoppingable": return false;
 
@@ -1515,6 +1895,10 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
             case "queryOrganization": return false;
 
             case "queryPartyRole": return false;
+
+            case "getNamespace": return true;
+
+            case "queryNamespace": return true;
 
             case "getPartyRoleName": return true;
 
@@ -1597,6 +1981,30 @@ public class QueryRoot extends AbstractResponse<QueryRoot> {
             case "getWebhook": return true;
 
             case "queryWebhook": return true;
+
+            case "getCart": return true;
+
+            case "queryCart": return true;
+
+            case "getCartItem": return true;
+
+            case "queryCartItem": return true;
+
+            case "getCheckout": return true;
+
+            case "queryCheckout": return true;
+
+            case "getCheckoutItem": return true;
+
+            case "queryCheckoutItem": return true;
+
+            case "getPoder": return true;
+
+            case "queryPoder": return true;
+
+            case "getPoderItem": return true;
+
+            case "queryPoderItem": return true;
 
             default: return false;
         }

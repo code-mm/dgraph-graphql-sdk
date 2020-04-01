@@ -28,7 +28,7 @@ import java.util.Map;
 /**
 * 组织定义的角色，组织内统筹定义
 */
-public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Thing {
+public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Node, Thing {
     public PartyRoleName() {
     }
 
@@ -37,6 +37,12 @@ public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Th
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -88,12 +94,6 @@ public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Th
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -153,8 +153,21 @@ public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Th
         }
     }
 
+    public PartyRoleName(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "PartyRoleName";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -223,19 +236,6 @@ public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Th
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public PartyRoleName setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * isPartyRoleNameOf,逆属性 Organization.hasPartyRoleName
     */
 
@@ -292,6 +292,8 @@ public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Th
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -301,8 +303,6 @@ public class PartyRoleName extends AbstractResponse<PartyRoleName> implements Th
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "isRoleNameOf": return false;
 

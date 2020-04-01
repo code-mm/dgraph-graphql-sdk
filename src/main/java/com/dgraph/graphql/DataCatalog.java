@@ -29,7 +29,7 @@ import java.util.Map;
 * Canonical URL: http://cnschema.org/DataCatalog
 * 【数据目录】数据集的目录 A collection of datasets.
 */
-public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing {
+public class DataCatalog extends AbstractResponse<DataCatalog> implements Node, Thing {
     public DataCatalog() {
     }
 
@@ -38,6 +38,12 @@ public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing 
             String key = field.getKey();
             String fieldName = getFieldName(key);
             switch (fieldName) {
+                case "id": {
+                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
+
+                    break;
+                }
+
                 case "namespaces": {
                     List<Namespace> optional1 = null;
                     if (!field.getValue().isJsonNull()) {
@@ -89,12 +95,6 @@ public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing 
                     }
 
                     responseData.put(key, optional1);
-
-                    break;
-                }
-
-                case "id": {
-                    responseData.put(key, new ID(jsonAsString(field.getValue(), key)));
 
                     break;
                 }
@@ -164,8 +164,21 @@ public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing 
         }
     }
 
+    public DataCatalog(ID id) {
+        this();
+        optimisticData.put("id", id);
+    }
+
     public String getGraphQlTypeName() {
         return "DataCatalog";
+    }
+
+    /**
+    * 
+    */
+
+    public ID getId() {
+        return (ID) get("id");
     }
 
     /**
@@ -234,19 +247,6 @@ public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing 
     }
 
     /**
-    * 
-    */
-
-    public ID getId() {
-        return (ID) get("id");
-    }
-
-    public DataCatalog setId(ID arg) {
-        optimisticData.put(getKey("id"), arg);
-        return this;
-    }
-
-    /**
     * 【所在父数据集目录】所在的父数据集目录 A data catalog which contains this dataset.
     */
 
@@ -301,6 +301,8 @@ public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing 
 
     public boolean unwrapsToObject(String key) {
         switch (getFieldName(key)) {
+            case "id": return false;
+
             case "namespaces": return true;
 
             case "identifier": return false;
@@ -310,8 +312,6 @@ public class DataCatalog extends AbstractResponse<DataCatalog> implements Thing 
             case "alternateName": return false;
 
             case "description": return false;
-
-            case "id": return false;
 
             case "parentDataCatalog": return true;
 

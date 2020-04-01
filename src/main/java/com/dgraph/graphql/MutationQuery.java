@@ -36,6 +36,24 @@ public class MutationQuery extends Query<MutationQuery> {
     /**
     * 
     */
+    public MutationQuery deleteNode(NodeFilter filter, DeleteNodePayloadQueryDefinition queryDef) {
+        startField("deleteNode");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeleteNodePayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
     public MutationQuery updateThing(UpdateThingInput input, UpdateThingPayloadQueryDefinition queryDef) {
         startField("updateThing");
 
@@ -1387,6 +1405,384 @@ public class MutationQuery extends Query<MutationQuery> {
 
         _queryBuilder.append('{');
         queryDef.define(new DeleteWebhookPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery addCart(List<AddCartInput> input, AddCartPayloadQueryDefinition queryDef) {
+        startField("addCart");
+
+        _queryBuilder.append("(input:");
+        _queryBuilder.append('[');
+        {
+            String listSeperator1 = "";
+            for (AddCartInput item1 : input) {
+                _queryBuilder.append(listSeperator1);
+                listSeperator1 = ",";
+                item1.appendTo(_queryBuilder);
+            }
+        }
+        _queryBuilder.append(']');
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new AddCartPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery updateCart(UpdateCartInput input, UpdateCartPayloadQueryDefinition queryDef) {
+        startField("updateCart");
+
+        _queryBuilder.append("(input:");
+        input.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new UpdateCartPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery deleteCart(CartFilter filter, DeleteCartPayloadQueryDefinition queryDef) {
+        startField("deleteCart");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeleteCartPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery addCartItem(List<AddCartItemInput> input, AddCartItemPayloadQueryDefinition queryDef) {
+        startField("addCartItem");
+
+        _queryBuilder.append("(input:");
+        _queryBuilder.append('[');
+        {
+            String listSeperator1 = "";
+            for (AddCartItemInput item1 : input) {
+                _queryBuilder.append(listSeperator1);
+                listSeperator1 = ",";
+                item1.appendTo(_queryBuilder);
+            }
+        }
+        _queryBuilder.append(']');
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new AddCartItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery updateCartItem(UpdateCartItemInput input, UpdateCartItemPayloadQueryDefinition queryDef) {
+        startField("updateCartItem");
+
+        _queryBuilder.append("(input:");
+        input.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new UpdateCartItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery deleteCartItem(CartItemFilter filter, DeleteCartItemPayloadQueryDefinition queryDef) {
+        startField("deleteCartItem");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeleteCartItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery addCheckout(List<AddCheckoutInput> input, AddCheckoutPayloadQueryDefinition queryDef) {
+        startField("addCheckout");
+
+        _queryBuilder.append("(input:");
+        _queryBuilder.append('[');
+        {
+            String listSeperator1 = "";
+            for (AddCheckoutInput item1 : input) {
+                _queryBuilder.append(listSeperator1);
+                listSeperator1 = ",";
+                item1.appendTo(_queryBuilder);
+            }
+        }
+        _queryBuilder.append(']');
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new AddCheckoutPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery updateCheckout(UpdateCheckoutInput input, UpdateCheckoutPayloadQueryDefinition queryDef) {
+        startField("updateCheckout");
+
+        _queryBuilder.append("(input:");
+        input.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new UpdateCheckoutPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery deleteCheckout(CheckoutFilter filter, DeleteCheckoutPayloadQueryDefinition queryDef) {
+        startField("deleteCheckout");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeleteCheckoutPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery addCheckoutItem(List<AddCheckoutItemInput> input, AddCheckoutItemPayloadQueryDefinition queryDef) {
+        startField("addCheckoutItem");
+
+        _queryBuilder.append("(input:");
+        _queryBuilder.append('[');
+        {
+            String listSeperator1 = "";
+            for (AddCheckoutItemInput item1 : input) {
+                _queryBuilder.append(listSeperator1);
+                listSeperator1 = ",";
+                item1.appendTo(_queryBuilder);
+            }
+        }
+        _queryBuilder.append(']');
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new AddCheckoutItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery updateCheckoutItem(UpdateCheckoutItemInput input, UpdateCheckoutItemPayloadQueryDefinition queryDef) {
+        startField("updateCheckoutItem");
+
+        _queryBuilder.append("(input:");
+        input.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new UpdateCheckoutItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery deleteCheckoutItem(CheckoutItemFilter filter, DeleteCheckoutItemPayloadQueryDefinition queryDef) {
+        startField("deleteCheckoutItem");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeleteCheckoutItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery addPoder(List<AddPoderInput> input, AddPoderPayloadQueryDefinition queryDef) {
+        startField("addPoder");
+
+        _queryBuilder.append("(input:");
+        _queryBuilder.append('[');
+        {
+            String listSeperator1 = "";
+            for (AddPoderInput item1 : input) {
+                _queryBuilder.append(listSeperator1);
+                listSeperator1 = ",";
+                item1.appendTo(_queryBuilder);
+            }
+        }
+        _queryBuilder.append(']');
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new AddPoderPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery updatePoder(UpdatePoderInput input, UpdatePoderPayloadQueryDefinition queryDef) {
+        startField("updatePoder");
+
+        _queryBuilder.append("(input:");
+        input.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new UpdatePoderPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery deletePoder(PoderFilter filter, DeletePoderPayloadQueryDefinition queryDef) {
+        startField("deletePoder");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeletePoderPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery addPoderItem(List<AddPoderItemInput> input, AddPoderItemPayloadQueryDefinition queryDef) {
+        startField("addPoderItem");
+
+        _queryBuilder.append("(input:");
+        _queryBuilder.append('[');
+        {
+            String listSeperator1 = "";
+            for (AddPoderItemInput item1 : input) {
+                _queryBuilder.append(listSeperator1);
+                listSeperator1 = ",";
+                item1.appendTo(_queryBuilder);
+            }
+        }
+        _queryBuilder.append(']');
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new AddPoderItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery updatePoderItem(UpdatePoderItemInput input, UpdatePoderItemPayloadQueryDefinition queryDef) {
+        startField("updatePoderItem");
+
+        _queryBuilder.append("(input:");
+        input.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new UpdatePoderItemPayloadQuery(_queryBuilder));
+        _queryBuilder.append('}');
+
+        return this;
+    }
+
+    /**
+    * 
+    */
+    public MutationQuery deletePoderItem(PoderItemFilter filter, DeletePoderItemPayloadQueryDefinition queryDef) {
+        startField("deletePoderItem");
+
+        _queryBuilder.append("(filter:");
+        filter.appendTo(_queryBuilder);
+
+        _queryBuilder.append(')');
+
+        _queryBuilder.append('{');
+        queryDef.define(new DeletePoderItemPayloadQuery(_queryBuilder));
         _queryBuilder.append('}');
 
         return this;
